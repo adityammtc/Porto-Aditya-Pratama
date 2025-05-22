@@ -1,93 +1,138 @@
+/* Reset Dasar & Gaya Global */
 body {
-    font-family: 'Arial', sans-serif; /* Jenis font dasar */
-    line-height: 1.6; /* Jarak antar baris */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font yang lebih modern */
+    line-height: 1.7;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4; /* Warna latar belakang halaman */
-    color: #333; /* Warna teks dasar */
+    background-color: #121212; /* Background hitam pekat */
+    color: #e0e0e0; /* Teks abu-abu terang (putih pudar) */
+    font-size: 16px; /* Ukuran font dasar */
 }
 
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff; /* Judul putih bersih */
+    margin-top: 0;
+    margin-bottom: 0.75em; /* Sedikit jarak bawah untuk judul */
+}
+
+p {
+    margin-bottom: 1em; /* Jarak antar paragraf */
+}
+
+a {
+    color: #bb86fc; /* Warna link ungu muda (sesuai material design dark theme) */
+    text-decoration: none; /* Hilangkan garis bawah standar */
+}
+
+a:hover {
+    color: #ffffff; /* Link jadi putih saat di-hover */
+    text-decoration: underline; /* Munculkan garis bawah saat hover */
+}
+
+/* Header dan Navigasi */
 header {
-    background-color: #333; /* Warna latar belakang header */
-    color: #fff; /* Warna teks di header */
-    padding: 1rem 0; /* Jarak di dalam header (atas/bawah kiri/kanan) */
-    text-align: center; /* Teks di header rata tengah */
+    background-color: #1f1f1f; /* Abu-abu sangat gelap untuk header */
+    color: #ffffff;
+    padding: 1.5rem 5%; /* Padding atas/bawah dan kiri/kanan (persentase agar responsif) */
+    text-align: center;
+    border-bottom: 2px solid #333333; /* Garis batas bawah halus */
 }
 
 header h1 {
     margin: 0;
     padding-bottom: 10px;
+    font-size: 2.5em; /* Ukuran judul utama */
+    letter-spacing: 1px; /* Sedikit jarak antar huruf */
 }
 
 header nav ul {
     padding: 0;
-    list-style: none; /* Menghilangkan bullet point pada daftar */
+    list-style: none;
+    margin: 0;
 }
 
 header nav ul li {
-    display: inline; /* Membuat item menu berjajar horizontal */
-    margin: 0 15px; /* Jarak antar item menu */
+    display: inline-block; /* Item menu berjajar horizontal */
+    margin: 0 15px;
 }
 
 header nav ul li a {
-    color: #fff; /* Warna link di navigasi */
-    text-decoration: none; /* Menghilangkan garis bawah pada link */
-    font-weight: bold;
+    color: #e0e0e0;
+    font-weight: 500; /* Sedikit lebih tebal */
+    font-size: 1.1em;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transisi halus */
 }
 
 header nav ul li a:hover {
-    color: #ffa500; /* Warna link saat kursor di atasnya (hover) */
+    background-color: #bb86fc; /* Latar ungu muda saat hover */
+    color: #121212; /* Teks jadi hitam saat hover di atas ungu */
+    text-decoration: none; /* Hilangkan underline di nav saat hover jika ada background */
 }
 
+/* Konten Utama */
 main {
-    width: 80%; /* Lebar konten utama */
-    margin: 20px auto; /* Membuat konten utama berada di tengah halaman */
-    padding: 20px;
-    background-color: #fff; /* Warna latar belakang konten utama */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Memberi bayangan halus */
-    border-radius: 8px; /* Membuat sudut sedikit melengkung */
+    width: 90%; /* Lebar konten utama */
+    max-width: 1000px; /* Batas lebar maksimum */
+    margin: 40px auto; /* Tengah secara horizontal, jarak atas/bawah */
+    padding: 0; /* Padding akan diberikan per section jika perlu */
 }
 
 section {
-    padding: 20px 0; /* Jarak di dalam section (atas/bawah) */
-    border-bottom: 1px dotted #ccc; /* Garis putus-putus sebagai pemisah antar section */
-}
-
-section:last-child {
-    border-bottom: none; /* Menghilangkan garis pemisah di section terakhir */
+    padding: 40px 20px; /* Padding dalam setiap section */
+    margin-bottom: 30px; /* Jarak antar section */
+    background-color: #1e1e1e; /* Latar sedikit lebih terang dari body untuk section */
+    border-radius: 8px; /* Sudut melengkung halus */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bayangan halus */
 }
 
 section h2 {
-    color: #333; /* Warna sub-judul */
-    margin-top: 0;
+    font-size: 2em; /* Ukuran sub-judul */
+    border-bottom: 1px solid #444; /* Garis bawah tipis untuk sub-judul */
+    padding-bottom: 10px;
+    margin-bottom: 25px;
 }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #222; /* Warna latar belakang footer */
-    color: #fff; /* Warna teks di footer */
-    margin-top: 30px;
-}
-
-/* Placeholder untuk styling model 3D, gambar, dan video nanti */
-.model-container {
+/* Placeholder untuk Model 3D, Video, Gambar */
+.model-container,
+.video-wrapper,
+.image-wrapper {
     width: 100%;
-    height: 400px; /* Sesuaikan tinggi sesuai kebutuhan */
-    background-color: #e0e0e0; /* Warna latar placeholder */
-    border: 1px solid #ccc;
+    min-height: 300px; /* Tinggi minimal agar terlihat */
+    background-color: #2a2a2a; /* Latar placeholder lebih gelap */
+    border: 1px dashed #555; /* Garis putus-putus untuk placeholder */
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    border-radius: 6px;
+    margin-top: 20px; /* Jarak dari paragraf di atasnya */
+    box-sizing: border-box; /* Agar padding dan border tidak menambah ukuran total */
 }
 
-.uv-map-image, .animation-video {
-    max-width: 100%; /* Membuat gambar/video responsif */
-    height: auto; /* Menjaga rasio aspek */
-    display: block; /* Menghilangkan spasi ekstra di bawah gambar/video */
-    margin: 10px auto; /* Memberi sedikit jarak dan memusatkan */
-    border: 1px solid #ddd;
-    padding: 5px;
-    background-color: #fff;
+.model-container p,
+.video-wrapper p,
+.image-wrapper p {
+    color: #888; /* Teks placeholder lebih redup */
+}
+
+.uv-map-image,
+video { /* Nanti akan kita pakai ini jika sudah ada gambar/video asli */
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Pusatkan jika tidak 100% width */
+    border-radius: 4px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 25px 5%;
+    background-color: #1f1f1f; /* Sama seperti header */
+    color: #aaaaaa; /* Teks abu-abu lebih terang di footer */
+    margin-top: 50px;
+    border-top: 2px solid #333333; /* Garis batas atas halus */
+    font-size: 0.9em;
 }
