@@ -86,29 +86,64 @@ header h1 {
     box-shadow: 0 0 10px rgba(187, 134, 252, 0.3); /* Bayangan halus untuk tab aktif */
 }
 
-/* Area Konten Tab */
+/* ... (CSS sebelumnya dari body sampai navigasi tab biarkan sama) ... */
+
+/* Area Konten Tab - INI BAGIAN YANG PENTING UNTUK SLIDE */
 .tab-content-area {
-    /* Tidak perlu style khusus di sini untuk sekarang */
+    position: relative; /* Diperlukan agar anak-anaknya bisa diposisikan absolut terhadap ini */
+    overflow: hidden;   /* Sembunyikan panel yang bergeser keluar area */
+    margin-top: 20px;
+    /* Anda bisa set tinggi tetap jika semua panel punya tinggi mirip,
+       atau biarkan dinamis dan atur min-height di .tab-pane */
+    min-height: 400px; /* Atau sesuaikan dengan konten terpanjangmu */
 }
 
 .tab-pane {
-    display: none; /* Sembunyikan semua panel secara default */
+    /* display: none;  Kita tidak pakai display:none lagi, tapi posisi absolut */
+    position: absolute; /* Semua panel berada di atas satu sama lain */
+    top: 0;
+    width: 100%; /* Mengisi lebar .tab-content-area */
     padding: 30px 15px;
     background-color: #1e1e1e;
     border-radius: 8px;
-    margin-top: 20px;
-    /* Untuk transisi */
-    opacity: 0;
-    transform: translateY(15px); /* Mulai sedikit dari bawah */
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    min-height: 300px; /* Agar panel tidak kolaps jika kosong */
+    box-sizing: border-box; /* Padding tidak menambah lebar */
+
+    /* Atur posisi awal di luar layar dan transisi */
+    left: 100%; /* Defaultnya, semua panel ada di kanan (kecuali yang aktif pertama) */
+    opacity: 0; /* Kita tetap pakai opacity untuk fade in/out saat slide */
+    transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    min-height: 300px;
 }
 
 .tab-pane.active {
-    display: block; /* Tampilkan panel yang aktif */
+    /* display: block; Tidak perlu lagi */
+    left: 0;     /* Panel aktif berada di tengah */
     opacity: 1;
-    transform: translateY(0);
+    z-index: 1; /* Pastikan panel aktif di atas yang lain jika ada tumpang tindih sesaat */
 }
+
+/* Kelas untuk animasi keluar */
+.tab-pane.slide-out-left {
+    left: -100%;
+    opacity: 0;
+}
+
+.tab-pane.slide-out-right {
+    left: 100%;
+    opacity: 0;
+}
+
+/* Kelas untuk posisi awal sebelum masuk */
+.tab-pane.prepare-slide-from-left {
+    left: -100%;
+    opacity: 0;
+}
+
+.tab-pane.prepare-slide-from-right {
+    left: 100%;
+    opacity: 0;
+}
+
 
 .tab-pane h2 {
     font-size: 2.2em;
@@ -117,7 +152,7 @@ header h1 {
     margin-bottom: 25px;
 }
 
-/* Styling untuk konten di dalam tab (placeholder, video, model, dll) */
+/* Styling untuk konten di dalam tab (placeholder, video, model, dll) - Biarkan sama */
 .placeholder-content,
 .video-wrapper,
 .model-container,
@@ -132,11 +167,12 @@ header h1 {
     text-align: center;
     border-radius: 6px;
     margin-top: 15px;
-    margin-bottom: 25px; /* Jarak antar item dalam breakdown */
+    margin-bottom: 25px;
     box-sizing: border-box;
     color: #888;
     padding: 20px;
 }
+
 
 .project-breakdown h3 {
     margin-top: 30px;
