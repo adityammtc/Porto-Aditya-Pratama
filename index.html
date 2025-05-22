@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portofolio 3D - [Nama Kamu]</title> <!-- GANTI [Nama Kamu] dengan namamu -->
     <link rel="stylesheet" href="style.css">
-    <!-- PENTING: PASTIKAN BARIS INI ADA DAN TIDAK ADA TYPO -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 </head>
 <body>
     <div class="portfolio-container">
@@ -32,35 +30,32 @@
                     <h3>Video Animasi Utama</h3>
                     <div class="video-wrapper">
                         <video controls loop preload="metadata" playsinline>
-                            <!-- PASTIKAN PATH KE VIDEO INI BENAR SESUAI STRUKTUR FOLDER: assets/final 2.mp4 -->
-                            <source src="assets/final 2.mp4" type="video/mp4">
+                            <source src="assets/final 2.mp4" type="video/mp4"> <!-- PASTIKAN PATH VIDEO INI BENAR -->
                             Browser Anda tidak mendukung tag video.
                         </video>
                     </div>
                     <p>Deskripsi detail tentang video animasi unggulan. Jelaskan konsep, durasi, dan peranmu dalam pembuatannya.</p>
 
-                    <h3>Detail Model 3D & Tekstur</h3>
-                    <div class="model-container" id="featured-model-viewer">
-                         <!-- PENTING: PASTIKAN PATH KE MODEL GLB INI BENAR DAN SAMA PERSIS NAMA FILE-NYA -->
-                         <model-viewer
-                            src="assets/model_unggulan.glb" <!-- GANTI DENGAN NAMA FILE .GLB KAMU YANG VALID -->
-                            alt="Deskripsi model 3D unggulan kamu"
-                            auto-rotate
-                            camera-controls
-                            environment-image="neutral"
-                            shadow-intensity="1"
-                            style="width: 100%; height: 400px; background-color: #222;">
-                            <!-- Progress bar loading telah dihapus dari sini -->
-                         </model-viewer>
+                    <h3>Detail Model 3D & Tekstur (via Sketchfab)</h3>
+                    <!-- PENTING: GANTI BAGIAN DI BAWAH DENGAN KODE EMBED SKETCHFAB UNTUK MODEL UNGGULANMU -->
+                    <div class="featured-model-wrapper" id="featured-model-sketchfab">
+                        <!-- CONTOH STRUKTUR JIKA MENGGUNAKAN KODE EMBED PENUH DARI SKETCHFAB -->
+                        <!-- <div class="sketchfab-embed-wrapper"> <iframe title="Nama Model Unggulan Kamu" ... src="URL_EMBED_MODEL_UNGGULAN_SKETCHFAB"> </iframe> <p>...</p> </div> -->
+                        
+                        <!-- ATAU JIKA HANYA IFRAME DENGAN STYLE MANUAL -->
+                        <iframe title="Model Unggulan Kamu di Sketchfab" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="MASUKKAN_URL_EMBED_SKETCHFAB_MODEL_UNGGULAN_KAMU_DISINI" style="width: 100%; height: 450px; border: none; border-radius: 6px;"> </iframe>
+                        <p style="text-align: center; margin-top: 8px; font-size: 0.9em;">Deskripsi singkat model unggulan jika tidak termasuk dalam embed Sketchfab.</p>
                     </div>
-                     <p>Deskripsi detail tentang model 3D unggulan, proses pembuatan, software yang digunakan, dan inspirasi.</p>
+                     <p>Deskripsi detail tentang model 3D unggulan, proses pembuatan, software yang digunakan, dan inspirasi (sekarang ditampilkan via Sketchfab).</p>
                      <p>Jelaskan tantangan yang dihadapi dan bagaimana kamu mengatasinya. Tekankan pada kualitas tekstur dan detail model.</p>
 
                     <h3>Pemangkasan UV (UV Unwrapping)</h3>
-                    <div class="image-wrapper placeholder-content">
-                        <p>Area untuk UV Map Proyek Unggulan</p>
+                    <div class="image-wrapper">
+                        <!-- Jika kamu punya gambar UV Map, letakkan di assets/ dan ganti src di bawah -->
+                        <img src="assets/uv_map_unggulan.jpg" alt="UV Map Proyek Unggulan">
+                        <!-- Jika tidak ada: <p>Area untuk UV Map Proyek Unggulan</p> -->
                     </div>
-                    <p>Penjelasan tentang pentingnya UV unwrapping yang baik untuk tekstur yang optimal. Mungkin tampilkan before-after jika memungkinkan.</p>
+                    <p>Penjelasan tentang pentingnya UV unwrapping yang baik untuk tekstur yang optimal.</p>
                 </article>
             </section>
 
@@ -70,47 +65,37 @@
                 <p>Berikut adalah beberapa video animasi lain yang telah saya kerjakan.</p>
                 <div class="gallery">
                     <div class="video-wrapper gallery-item">
-                        <p>Video 1 (placeholder) - Ganti dengan video atau model-viewer jika perlu</p>
+                        <video controls loop preload="metadata" playsinline>
+                            <source src="assets/video_lain_1.mp4" type="video/mp4"> <!-- GANTI DENGAN PATH VIDEO KAMU -->
+                            Browser Anda tidak mendukung tag video.
+                        </video>
+                        <p class="video-caption">Deskripsi singkat Video 1</p>
                     </div>
                     <div class="video-wrapper gallery-item">
-                        <p>Video 2 (placeholder) - Ganti dengan video atau model-viewer jika perlu</p>
+                         <video controls loop preload="metadata" playsinline>
+                            <source src="assets/video_lain_2.mp4" type="video/mp4"> <!-- GANTI DENGAN PATH VIDEO KAMU -->
+                            Browser Anda tidak mendukung tag video.
+                        </video>
+                        <p class="video-caption">Deskripsi singkat Video 2</p>
                     </div>
                 </div>
-                <p>Deskripsi singkat untuk setiap video atau penjelasan umum tentang jenis animasi yang kamu buat.</p>
             </section>
 
-            <!-- Panel Konten untuk Tab "3D Models" -->
+            <!-- Panel Konten untuk Tab "3D Models" (via Sketchfab) -->
             <section id="models" class="tab-pane">
-                <h2>Galeri Model 3D</h2>
+                <h2>Galeri Model 3D (via Sketchfab)</h2>
                 <p>Kumpulan model 3D yang pernah saya buat. Fokus pada bentuk dan detail modeling.</p>
                 <div class="gallery">
-                    <!-- ITEM MODEL 1 -->
-                    <div class="model-container gallery-item" id="general-model-1">
-                         <!-- PENTING: PASTIKAN PATH KE MODEL GLB INI BENAR DAN SAMA PERSIS NAMA FILE-NYA -->
-                         <model-viewer
-                            src="assets/model_unggulan.glb" <!-- GANTI INI DENGAN NAMA FILE .GLB KAMU YANG VALID -->
-                            alt="Deskripsi model 3D umum 1"
-                            camera-controls
-                            auto-rotate
-                            environment-image="neutral"
-                            shadow-intensity="1"
-                            style="width: 100%; height: 300px; background-color: #222;">
-                            <!-- Progress bar loading telah dihapus dari sini -->
-                         </model-viewer>
+                    <!-- ITEM MODEL 1 (SKETCHFAB) - MODEL "test model" KAMU SUDAH DIMASUKKAN -->
+                    <div class="gallery-item" id="general-model-1-sketchfab">
+                        <div class="sketchfab-embed-wrapper"> <iframe title="test model" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/fcf61a36864e493fa00eb2867991b2ca/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/test-model-fcf61a36864e493fa00eb2867991b2ca?utm_medium=embed&utm_campaign=share-popup&utm_content=fcf61a36864e493fa00eb2867991b2ca" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> test model </a> by <a href="https://sketchfab.com/adityagamer6?utm_medium=embed&utm_campaign=share-popup&utm_content=fcf61a36864e493fa00eb2867991b2ca" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> adityagamer6 </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=fcf61a36864e493fa00eb2867991b2ca" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
                     </div>
-                    <!-- ITEM MODEL 2 -->
-                    <div class="model-container gallery-item" id="general-model-2">
-                        <!-- PENTING: PASTIKAN PATH KE MODEL GLB INI BENAR DAN SAMA PERSIS NAMA FILE-NYA -->
-                        <model-viewer
-                            src="assets/model_unggulan.glb" <!-- GANTI INI DENGAN NAMA FILE .GLB KAMU YANG VALID -->
-                            alt="Deskripsi model 3D umum 2"
-                            camera-controls
-                            auto-rotate
-                            environment-image="neutral"
-                            shadow-intensity="1"
-                            style="width: 100%; height: 300px; background-color: #222;">
-                            <!-- Progress bar loading telah dihapus dari sini -->
-                        </model-viewer>
+
+                    <!-- ITEM MODEL 2 (SKETCHFAB) - PENTING: GANTI DENGAN KODE EMBED SKETCHFAB MODEL KEDUAMU JIKA ADA -->
+                    <div class="gallery-item" id="general-model-2-sketchfab">
+                        <!-- PASTE KODE EMBED PENUH DARI SKETCHFAB UNTUK MODEL KEDUAMU DI SINI -->
+                        <!-- Contoh jika belum ada model kedua: -->
+                        <p style="text-align:center; padding: 20px; color:#777; height: 300px; display:flex; align-items:center; justify-content:center; background-color: #222; border-radius:6px;">Placeholder untuk Model 3D ke-2. Ganti dengan embed Sketchfab.</p>
                     </div>
                 </div>
                 <p>Berikan konteks untuk model-model ini, apakah itu aset game, visualisasi produk, atau karya seni pribadi.</p>
@@ -127,7 +112,7 @@
         </main>
 
         <footer class="site-footer">
-            <p>© 2024 [Nama Kamu]. All Rights Reserved.</p> <!-- GANTI [Nama Kamu] dengan namamu -->
+            <p>© <span id="currentYear"></span> [Nama Kamu]. All Rights Reserved.</p> <!-- GANTI [Nama Kamu] dengan namamu -->
         </footer>
     </div> <!-- Akhir .portfolio-container -->
     <script src="script.js"></script>
