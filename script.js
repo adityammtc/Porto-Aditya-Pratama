@@ -1,57 +1,86 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabPanes = document.querySelectorAll('.tab-pane');
+    const tabButtons = Array.from(document.querySelectorAll('.tab-button')); // Ubah NodeList jadi Array
+    const tabPanes = Array.from(document.querySelectorAll('.tab-pane'));   // Ubah NodeList jadi Array
+    let currentActiveIndex = tabButtons.findIndex(button => button.classList.contains('active'));
 
-    // Fungsi untuk menampilkan tab tertentu dan menyembunyikan yang lain
-    function showTab(tabId) {
-        // Sembunyikan semua panel konten dan hapus kelas aktif dari tombol
-        tabPanes.forEach(pane => {
-            pane.classList.remove('active');
-            // Jika Anda ingin memastikan display: none diterapkan sebelum transisi berikutnya
-            // pane.style.display = 'none'; // Baris ini bisa di-uncomment jika ada masalah flicker
-        });
-        tabButtons.forEach(button => {
-            button.classList.remove('active');
-        });
-
-        // Tampilkan panel yang dipilih dan set tombolnya sebagai aktif
-        const selectedPane = document.getElementById(tabId);
-        const selectedButton = document.querySelector(`.tab-button[data-tab="${tabId}"]`);
-
-        if (selectedPane && selectedButton) {
-            // Penting: set display block SEBELUM memicu transisi opacity/transform
-            // Untuk browser modern, perubahan kelas yang memicu display:block dan opacity/transform
-            // dalam satu siklus event loop biasanya cukup.
-            // Jika ada masalah, Anda bisa memaksa reflow atau menggunakan setTimeout(..., 0)
-            // tapi biasanya tidak diperlukan.
-
-            selectedPane.classList.add('active');
-            selectedButton.classList.add('active');
-        } else {
-            console.error(`Tab atau pane dengan ID "${tabId}" tidak ditemukan.`);
-        }
+    // Jika tidak ada yang aktif di HTML, set yang pertama sebagai aktif
+    if (currentActiveIndex === -1 && tabButtons.length > 0) {
+        tabButtons[0].classList.add('active');
+        tabPanes[0].classList.add('active');
+        currentActiveIndex = 0;
     }
 
-    // Tambahkan event listener ke setiap tombol tab
-    tabButtons.forEach(button => {
+    // Atur posisi awal panel yang tidak aktif (selain yang pertama)
+    // Ini penting karena kita tidak lagi menggunakan display:none
+    tabPanes.forEach((pane, index) => {
+        if (index !== currentActiveIndex) {
+            pane.style.left = '100%'; // Default di kanan
+            pane.style.opacity = '0';
+        } else {
+            pane.style.left = '0'; // Panel aktif pertama di tengah
+            pane.style.opacity = '1';
+        }
+    });
+
+
+    function showTab(targetIndex) {
+        if (targetIndex === currentActiveIndex) return; // Jika tab yang sama diklik, tidak ada aksi
+
+        const currentPane = tabPanes[currentActiveIndex];
+        const targetPane = tabPanes[targetIndex];
+        const currentButton = tabButtons[currentActiveIndex];
+        const targetButton = tabButtons[targetIndex];
+
+        // Hapus kelas aktif dari tombol dan panel saat ini
+        currentButton.classList.remove('active');
+        // currentPane.classList.remove('active'); // Kita akan atur left dan opacity manual
+
+        // Tambah kelas aktif ke tombol dan panel target
+        targetButton.classList.add('active');
+        // targetPane.classList.add('active'); // Kita akan atur left dan opacity manual
+
+        // Tentukan arah slide
+        if (targetIndex > currentActiveIndex) { // Slide ke kiri (panel baru datang dari kanan)
+            // Panel saat ini keluar ke kiri
+            currentPane.style.left = '-100%';
+            currentPane.style.opacity = '0';
+
+            // Panel target masuk dari kanan
+            targetPane.style.left = '100%'; // Pastikan posisi awal sebelum transisi
+            targetPane.style.opacity = '0'; // Mulai transparan
+            // Beri sedikit waktu browser untuk render posisi awal sebelum transisi
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => { // Double requestAnimationFrame untuk kestabilan
+                    targetPane.style.left = '0';
+                    targetPane.style.opacity = '1';
+                });
+            });
+
+        } else { // Slide ke kanan (panel baru datang dari kiri)
+            // Panel saat ini keluar ke kanan
+            currentPane.style.left = '100%';
+            currentPane.style.opacity = '0';
+
+            // Panel target masuk dari kiri
+            targetPane.style.left = '-100%'; // Pastikan posisi awal
+            targetPane.style.opacity = '0';
+             requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    targetPane.style.left = '0';
+                    targetPane.style.opacity = '1';
+                });
+            });
+        }
+
+        // Update indeks aktif saat ini
+        currentActiveIndex = targetIndex;
+    }
+
+    tabButtons.forEach((button, index) => {
         button.addEventListener('click', function() {
-            const tabIdToActivate = this.dataset.tab; // Ambil nilai dari data-tab
-            showTab(tabIdToActivate);
+            showTab(index);
         });
     });
 
-    // (Opsional) Tampilkan tab pertama secara default jika tidak ada yang 'active' di HTML
-    // Kode HTML kita sudah menandai tab pertama sebagai aktif, jadi ini lebih sebagai pengaman.
-    const initiallyActiveButton = document.querySelector('.tab-button.active');
-    if (initiallyActiveButton) {
-        const initialTabId = initiallyActiveButton.dataset.tab;
-        // Kita sudah set kelas 'active' di HTML, jadi tidak perlu panggil showTab() lagi
-        // kecuali jika kita ingin memastikan logikanya berjalan.
-        // Untuk sekarang, biarkan saja karena HTML sudah benar.
-    } else if (tabButtons.length > 0) {
-        // Jika tidak ada yang aktif di HTML, aktifkan yang pertama
-        showTab(tabButtons[0].dataset.tab);
-    }
-
-    console.log("Sistem tab portofolio siap!");
+    console.log("Sistem tab portofolio dengan slide siap!");
 });
