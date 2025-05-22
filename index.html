@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio 3D - [Nama Kamu]</title> <!-- Ganti [Nama Kamu] -->
+    <title>Portofolio 3D - [Nama Kamu]</title> <!-- Ganti [Nama Kamu] jika belum -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,9 +11,9 @@
         <h1>Portofolio 3D Saya</h1>
         <nav>
             <ul>
-                <!-- Kita akan sesuaikan link ini agar smooth scroll nanti jika perlu -->
-                <li><a href="#animasi3d">Model & Tekstur</a></li>
+                <!-- URUTAN NAVIGASI BARU -->
                 <li><a href="#video">Video Showcase</a></li>
+                <li><a href="#animasi3d">Model & Tekstur</a></li>
                 <li><a href="#uvmap">UV Map</a></li>
                 <li><a href="#tentang">Tentang</a></li>
             </ul>
@@ -21,15 +21,7 @@
     </header>
 
     <main>
-        <section id="animasi3d">
-            <h2>Model 3D Interaktif & Tekstur</h2>
-            <p>Putar, zoom, dan lihat detail tekstur pada model 3D berikut. Beberapa model mungkin memiliki animasi bawaan.</p>
-            <div class="model-container" id="model-viewer-container">
-                <!-- Model 3D akan dimuat di sini menggunakan JavaScript -->
-                <p style="padding: 20px; color: #777;">Area untuk Model 3D</p>
-            </div>
-        </section>
-
+        <!-- SECTION VIDEO PINDAH KE ATAS -->
         <section id="video">
             <h2>Video Showcase Animasi</h2>
             <p>Berikut adalah beberapa karya animasi yang telah saya render.</p>
@@ -45,6 +37,17 @@
             </div>
         </section>
 
+        <!-- SECTION MODEL 3D SETELAH VIDEO -->
+        <section id="animasi3d">
+            <h2>Model 3D Interaktif & Tekstur</h2>
+            <p>Putar, zoom, dan lihat detail tekstur pada model 3D berikut. Beberapa model mungkin memiliki animasi bawaan.</p>
+            <div class="model-container" id="model-viewer-container">
+                <!-- Model 3D akan dimuat di sini menggunakan JavaScript -->
+                <p style="padding: 20px; color: #777;">Area untuk Model 3D</p>
+            </div>
+        </section>
+
+        <!-- SECTION UV MAP SETELAH MODEL 3D -->
         <section id="uvmap">
             <h2>Contoh Pemangkasan UV (UV Unwrapping)</h2>
             <p>Ini adalah tampilan UV map dari salah satu model saya, menunjukkan bagaimana tekstur dipetakan ke permukaan 3D.</p>
@@ -60,16 +63,14 @@
         <section id="tentang">
             <h2>Tentang Saya</h2>
             <p>Halo! Saya [Nama Kamu], seorang seniman 3D yang berfokus pada [Sebutkan Spesialisasimu, misal: karakter modeling, environment design, product visualization]. Saya menikmati proses kreatif dari konsep hingga hasil akhir. Silakan lihat karya-karya saya!</p>
-            <!-- Tambahkan info kontak jika mau di sini atau di footer -->
-            <p>Hubungi saya di: <a href="mailto:emailkamu@example.com">emailkamu@example.com</a></p> <!-- Ganti email kamu -->
+            <p>Hubungi saya di: <a href="mailto:emailkamu@example.com">emailkamu@example.com</a></p> <!-- Ganti email kamu jika belum -->
         </section>
     </main>
 
     <footer>
-        <p>© 2024 [Nama Kamu]. All Rights Reserved.</p> <!-- Ganti [Nama Kamu] -->
+        <p>© 2024 [Nama Kamu]. All Rights Reserved.</p> <!-- Ganti [Nama Kamu] jika belum -->
     </footer>
 
-    <!-- Script untuk Model Viewer (atau library lain) akan kita tambahkan nanti -->
     <script src="script.js"></script>
 </body>
 </html>
