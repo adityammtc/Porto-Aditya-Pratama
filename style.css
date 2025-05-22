@@ -10,8 +10,8 @@ body {
 }
 
 .portfolio-container {
-    max-width: 1200px; /* Lebar maksimum konten */
-    margin: 0 auto; /* Pusatkan container */
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
 }
 
@@ -54,96 +54,89 @@ header h1 {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex; /* Susun tombol tab secara horizontal */
-    justify-content: center; /* Pusatkan tombol tab */
-    gap: 10px; /* Jarak antar tombol tab */
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 .tab-navigation .tab-button {
     background-color: #2a2a2a;
     color: #e0e0e0;
     border: 1px solid #444;
-    padding: 12px 25px; /* Lebih besar agar mudah diklik */
+    padding: 12px 25px;
     font-size: 1.1em;
     font-weight: 500;
     cursor: pointer;
     border-radius: 6px;
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-    outline: none; /* Hilangkan outline default browser */
+    outline: none;
 }
 
 .tab-navigation .tab-button:hover {
     background-color: #3a3a3a;
     border-color: #666;
-    transform: translateY(-2px); /* Efek sedikit terangkat */
+    transform: translateY(-2px);
 }
 
 .tab-navigation .tab-button.active {
-    background-color: #bb86fc; /* Warna ungu untuk tab aktif */
-    color: #121212; /* Teks hitam di tab aktif */
+    background-color: #bb86fc;
+    color: #121212;
     border-color: #bb86fc;
     font-weight: bold;
-    box-shadow: 0 0 10px rgba(187, 134, 252, 0.3); /* Bayangan halus untuk tab aktif */
+    box-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
 }
 
-/* ... (CSS sebelumnya dari body sampai navigasi tab biarkan sama) ... */
-
-/* Area Konten Tab - INI BAGIAN YANG PENTING UNTUK SLIDE */
+/* Area Konten Tab - PENTING UNTUK SLIDE DAN SCROLL */
 .tab-content-area {
-    position: relative; /* Diperlukan agar anak-anaknya bisa diposisikan absolut terhadap ini */
-    overflow: hidden;   /* Sembunyikan panel yang bergeser keluar area */
+    position: relative; /* Untuk positioning absolut anak-anaknya */
+    overflow: hidden;   /* Sembunyikan panel yang bergeser keluar area saat transisi */
     margin-top: 20px;
-    /* Anda bisa set tinggi tetap jika semua panel punya tinggi mirip,
-       atau biarkan dinamis dan atur min-height di .tab-pane */
-    min-height: 400px; /* Atau sesuaikan dengan konten terpanjangmu */
+    /* Biarkan tinggi area konten dinamis, panel aktif akan mengatur tingginya */
 }
 
 .tab-pane {
-    /* display: none;  Kita tidak pakai display:none lagi, tapi posisi absolut */
-    position: absolute; /* Semua panel berada di atas satu sama lain */
+    position: absolute; /* Semua panel berada di atas satu sama lain untuk transisi */
     top: 0;
-    width: 100%; /* Mengisi lebar .tab-content-area */
-    padding: 30px 15px;
+    width: 100%;
+    box-sizing: border-box; /* Padding dan border tidak menambah ukuran total */
+    padding: 30px 25px; /* Padding di dalam panel */
     background-color: #1e1e1e;
     border-radius: 8px;
-    box-sizing: border-box; /* Padding tidak menambah lebar */
 
     /* Atur posisi awal di luar layar dan transisi */
     left: 100%; /* Defaultnya, semua panel ada di kanan (kecuali yang aktif pertama) */
-    opacity: 0; /* Kita tetap pakai opacity untuk fade in/out saat slide */
+    opacity: 0;
     transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    min-height: 300px;
+
+    /* Untuk scrolling di dalam tab jika konten panjang */
+    overflow-y: auto; /* Aktifkan scroll vertikal jika perlu */
+    /* Tentukan tinggi maksimum agar scrollbar muncul di dalam panel.
+       SESUAIKAN NILAI 250px INI berdasarkan tinggi header, nav, footer, dan margin Anda! */
+    max-height: calc(100vh - 230px); /* Contoh: 100vh - (header_h1_approx_70 + nav_tab_approx_50 + footer_approx_60 + margins_approx_50) */
+    min-height: 300px; /* Tinggi minimal agar panel terlihat */
+
+    visibility: hidden; /* Sembunyikan panel non-aktif dari interaksi dan rendering */
 }
 
 .tab-pane.active {
-    /* display: block; Tidak perlu lagi */
     left: 0;     /* Panel aktif berada di tengah */
     opacity: 1;
-    z-index: 1; /* Pastikan panel aktif di atas yang lain jika ada tumpang tindih sesaat */
+    z-index: 1; /* Pastikan panel aktif di atas yang lain */
+    visibility: visible; /* Panel aktif terlihat dan interaktif */
 }
 
-/* Kelas untuk animasi keluar */
-.tab-pane.slide-out-left {
+/* Kelas untuk animasi keluar tidak perlu diubah */
+.tab-pane.slide-out-left { /* Tidak digunakan di JS saat ini tapi bisa jika diperlukan */
     left: -100%;
     opacity: 0;
+    visibility: hidden;
 }
 
-.tab-pane.slide-out-right {
+.tab-pane.slide-out-right { /* Tidak digunakan di JS saat ini tapi bisa jika diperlukan */
     left: 100%;
     opacity: 0;
+    visibility: hidden;
 }
-
-/* Kelas untuk posisi awal sebelum masuk */
-.tab-pane.prepare-slide-from-left {
-    left: -100%;
-    opacity: 0;
-}
-
-.tab-pane.prepare-slide-from-right {
-    left: 100%;
-    opacity: 0;
-}
-
 
 .tab-pane h2 {
     font-size: 2.2em;
@@ -152,7 +145,7 @@ header h1 {
     margin-bottom: 25px;
 }
 
-/* Styling untuk konten di dalam tab (placeholder, video, model, dll) - Biarkan sama */
+/* Styling untuk konten di dalam tab (placeholder, video, model, dll) */
 .placeholder-content,
 .video-wrapper,
 .model-container,
@@ -173,7 +166,6 @@ header h1 {
     padding: 20px;
 }
 
-
 .project-breakdown h3 {
     margin-top: 30px;
     margin-bottom: 10px;
@@ -184,14 +176,13 @@ header h1 {
 /* Galeri untuk video dan model */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Grid responsif */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     margin-top: 20px;
 }
 
 .gallery-item {
-    /* Style tambahan untuk item di galeri jika perlu */
-    min-height: 250px; /* Sesuaikan tinggi item galeri */
+    min-height: 250px;
 }
 
 .uv-map-image,
