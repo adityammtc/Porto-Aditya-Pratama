@@ -7,7 +7,7 @@ body {
     background-color: #121212;
     color: #e0e0e0;
     font-size: 16px;
-    overflow-x: hidden; /* Mencegah scrollbar horizontal karena transform saat transisi */
+    /* overflow-x: hidden; sudah tidak terlalu krusial tanpa transisi horizontal */
 }
 
 .portfolio-container {
@@ -73,14 +73,14 @@ a:hover {
     font-weight: 500;
     cursor: pointer;
     border-radius: 6px;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease; /* Transisi untuk hover saja */
     outline: none;
 }
 
 .tab-navigation .tab-button:hover {
     background-color: #3a3a3a;
     border-color: #666;
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Efek angkat kecil saat hover */
 }
 
 .tab-navigation .tab-button.active {
@@ -95,53 +95,27 @@ a:hover {
 .tab-content-area {
     padding-top: 30px;
     padding-bottom: 30px;
-    position: relative; /* PENTING: Untuk positioning absolut anak-anaknya */
-    overflow: hidden;   /* PENTING: Memotong konten panel yang bergerak keluar masuk */
-    min-height: 400px;  /* Beri tinggi agar tidak collapse jika konten belum ada */
+    /* position: relative; Tidak terlalu dibutuhkan lagi tanpa child absolute */
+    /* overflow: hidden; Tidak terlalu dibutuhkan lagi tanpa transisi slide */
 }
 
 .tab-pane {
+    display: none; /* Semua panel tab disembunyikan secara default */
     padding: 20px;
     background-color: #1e1e1e;
     border-radius: 8px;
-    width: 100%; /* Pastikan panel mengisi lebar container */
-    box-sizing: border-box; /* Agar padding tidak menambah lebar */
-
-    /* Properti transisi akan diterapkan saat kelas .active atau .is-exiting-* ditambahkan/dihapus */
-    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-
-    /* Awalnya semua panel (kecuali yang .active di HTML) akan diatur oleh JS */
-    /* display: none; akan diatur oleh JS */
-    /* opacity: 0; akan diatur oleh JS */
-    /* transform: translateX(100%); akan diatur oleh JS */
-    /* position: absolute; akan diatur oleh JS selama transisi */
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .tab-pane.active {
-    /* Panel aktif akan menjadi terlihat dan di posisi normal */
-    display: block !important; /* Pastikan terlihat, !important jika ada konflik */
-    opacity: 1;
-    transform: translateX(0);
-    position: relative; /* Kembali ke flow normal dokumen */
-    z-index: 1; /* Di atas panel yang sedang keluar */
+    display: block; /* Hanya panel tab dengan kelas 'active' yang ditampilkan */
 }
 
-/* Kelas untuk animasi KELUAR panel saat ini */
-.tab-pane.is-exiting-left {
-    /* Panel saat ini keluar ke kiri */
-    transform: translateX(-100%);
-    opacity: 0;
-    /* position: absolute; akan diatur oleh JS */
-    /* z-index: 0; akan diatur oleh JS */
-}
-
-.tab-pane.is-exiting-right {
-    /* Panel saat ini keluar ke kanan */
-    transform: translateX(100%);
-    opacity: 0;
-    /* position: absolute; akan diatur oleh JS */
-    /* z-index: 0; akan diatur oleh JS */
-}
+/* HAPUS KELAS-KELAS ANIMASI YANG TIDAK DIGUNAKAN LAGI */
+/* .tab-pane.is-exiting-left, .tab-pane.is-exiting-right, .tab-pane.is-entering-from-left */
+/* tidak ada lagi di CSS ini */
 
 
 .tab-pane h2 {
@@ -176,7 +150,7 @@ a:hover {
 .video-wrapper iframe,
 .video-wrapper video,
 .image-wrapper img,
-.model-container model-viewer { /* Pastikan tag model-viewer ada agar style ini berlaku */
+.model-container model-viewer {
     max-width: 100%;
     height: auto;
     display: block;
@@ -186,8 +160,8 @@ a:hover {
 
 .model-container model-viewer {
     width: 100%;
-    height: 400px; /* Sesuaikan jika perlu */
-    background-color: #222; /* Latar belakang viewer */
+    height: 400px;
+    background-color: #222; /* Beri warna latar jika model transparan */
 }
 
 .project-breakdown h3 {
@@ -216,5 +190,5 @@ a:hover {
     color: #aaaaaa;
     border-top: 2px solid #333333;
     font-size: 0.9em;
-    margin-top: 20px; /* Beri jarak dari konten utama */
+    margin-top: 20px;
 }
