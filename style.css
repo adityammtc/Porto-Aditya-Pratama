@@ -7,7 +7,6 @@ body {
     background-color: #121212;
     color: #e0e0e0;
     font-size: 16px;
-    /* overflow-x: hidden; sudah tidak terlalu krusial tanpa transisi horizontal */
 }
 
 .portfolio-container {
@@ -73,14 +72,14 @@ a:hover {
     font-weight: 500;
     cursor: pointer;
     border-radius: 6px;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease; /* Transisi untuk hover saja */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
     outline: none;
 }
 
 .tab-navigation .tab-button:hover {
     background-color: #3a3a3a;
     border-color: #666;
-    transform: translateY(-2px); /* Efek angkat kecil saat hover */
+    transform: translateY(-2px);
 }
 
 .tab-navigation .tab-button.active {
@@ -95,12 +94,10 @@ a:hover {
 .tab-content-area {
     padding-top: 30px;
     padding-bottom: 30px;
-    /* position: relative; Tidak terlalu dibutuhkan lagi tanpa child absolute */
-    /* overflow: hidden; Tidak terlalu dibutuhkan lagi tanpa transisi slide */
 }
 
 .tab-pane {
-    display: none; /* Semua panel tab disembunyikan secara default */
+    display: none;
     padding: 20px;
     background-color: #1e1e1e;
     border-radius: 8px;
@@ -110,13 +107,8 @@ a:hover {
 }
 
 .tab-pane.active {
-    display: block; /* Hanya panel tab dengan kelas 'active' yang ditampilkan */
+    display: block;
 }
-
-/* HAPUS KELAS-KELAS ANIMASI YANG TIDAK DIGUNAKAN LAGI */
-/* .tab-pane.is-exiting-left, .tab-pane.is-exiting-right, .tab-pane.is-entering-from-left */
-/* tidak ada lagi di CSS ini */
-
 
 .tab-pane h2 {
     font-size: 2.2em;
@@ -126,15 +118,15 @@ a:hover {
     margin-top: 0;
 }
 
-/* Styling untuk konten di dalam tab (placeholder, video, model, dll) - Sama */
+/* Styling untuk konten di dalam tab (placeholder, video, model, dll) */
 .placeholder-content,
 .video-wrapper,
 .model-container,
 .image-wrapper {
-    width: 100%;
-    min-height: 200px;
-    background-color: #2a2a2a;
-    border: 1px dashed #555;
+    width: 100%; /* Container akan mengambil lebar penuh */
+    /* min-height: 200px; Tidak selalu dibutuhkan jika konten di dalamnya punya tinggi pasti */
+    background-color: #2a2a2a; /* Latar belakang untuk area jika konten tidak mengisi penuh */
+    border: 1px dashed #555;   /* Border untuk menandai area, bisa dihapus jika sudah ada konten */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -143,26 +135,76 @@ a:hover {
     margin-top: 15px;
     margin-bottom: 25px;
     box-sizing: border-box;
-    color: #888;
-    padding: 20px;
+    color: #888; /* Warna teks untuk placeholder */
+    padding: 0; /* Hapus padding jika konten (seperti model-viewer) akan mengisi penuh */
+                /* Jika kamu ingin ada jarak di dalam, tambahkan padding kembali, misal: padding: 10px; */
+    position: relative; /* Untuk progress bar agar bisa diposisikan absolut di dalamnya */
+}
+
+/* Untuk placeholder yang masih berupa teks */
+.placeholder-content p {
+    padding: 20px; /* Beri padding agar teks placeholder tidak menempel ke border */
 }
 
 .video-wrapper iframe,
 .video-wrapper video,
-.image-wrapper img,
-.model-container model-viewer {
+.image-wrapper img {
     max-width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
-    border-radius: 4px;
+    border-radius: 4px; /* Samakan dengan container jika perlu */
 }
 
+/* Styling spesifik untuk model-viewer */
 .model-container model-viewer {
-    width: 100%;
-    height: 400px;
-    background-color: #222; /* Beri warna latar jika model transparan */
+    /* Atribut style="width: 100%; height: 400px;" pada tag HTML akan menimpa ini jika berbeda.
+       Lebih baik konsisten atau atur di satu tempat saja (misal, di HTML atau di sini).
+       Jika diatur di HTML, ini bisa dikosongkan atau digunakan untuk properti lain. */
+    width: 100%; /* Default, akan mengisi .model-container */
+    /* height: 400px; Ukuran tinggi bisa diatur per instance di HTML atau di sini */
+    /* background-color: #222; Warna latar model-viewer, bisa diatur di HTML */
+    border: none; /* Hapus border default dari model-viewer jika ada */
+    border-radius: 6px; /* Samakan dengan radius .model-container jika diinginkan */
+    display: block; /* Pastikan mengambil ruang blok */
 }
+
+/* CSS untuk progress bar (opsional, jika kamu menggunakannya di HTML) */
+.model-container .progress-bar {
+    display: block; /* Akan di-toggle opacitynya */
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(34, 34, 34, 0.85); /* Latar belakang progress bar overlay */
+    display: flex; /* Untuk menengahkan update-bar */
+    flex-direction: column; /* Teks di atas bar */
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease 0.2s; /* Transisi opacity dengan sedikit delay */
+    pointer-events: none; /* Agar tidak mengganggu interaksi mouse setelah hilang */
+    border-radius: 6px; /* Samakan dengan container */
+    z-index: 5; /* Pastikan di atas model saat loading */
+    color: #e0e0e0; /* Warna teks loading */
+    font-size: 0.9em;
+}
+.model-container .progress-bar.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+.model-container .progress-bar span { /* Untuk teks "Loading..." */
+    margin-bottom: 10px;
+}
+.model-container .update-bar {
+    background-color: #bb86fc; /* Warna bar loading */
+    width: 0%; /* Akan diupdate oleh JavaScript model-viewer */
+    height: 5px;
+    border-radius: 2.5px;
+    transition: width 0.2s ease-out; /* Transisi saat bar memanjang */
+    max-width: 70%; /* Batasi lebar maksimum bar agar tidak terlalu lebar di layar besar */
+}
+
 
 .project-breakdown h3 {
     margin-top: 30px;
@@ -179,7 +221,13 @@ a:hover {
 }
 
 .gallery-item {
-    min-height: 250px;
+    /* min-height: 250px; */ /* Mungkin tidak perlu jika model-viewer atau video punya tinggi tetap */
+    /* Jika menggunakan .model-container sebagai gallery-item, pastikan ukurannya sesuai */
+}
+
+/* Contoh jika model-viewer di gallery memiliki tinggi yang berbeda */
+.gallery .model-container.gallery-item model-viewer {
+    /* height: 300px; Akan diatur via style attribute di HTML atau bisa di sini */
 }
 
 /* Footer */
