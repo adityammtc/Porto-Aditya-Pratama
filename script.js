@@ -2,55 +2,56 @@ document.addEventListener('DOMContentLoaded', function() {
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabPanes = document.querySelectorAll('.tab-pane');
 
-    // Sembunyikan semua panel tab kecuali yang aktif pertama (jika ada)
-    // dan pastikan tombol yang sesuai juga aktif.
-    let activeTabFound = false;
-    tabPanes.forEach(pane => {
-        if (pane.classList.contains('active')) {
-            pane.style.display = 'block'; // Tampilkan panel yang sudah ada kelas 'active'
-            activeTabFound = true;
-            // Pastikan tombol yang sesuai juga aktif
-            const activeButton = document.querySelector(`.tab-button[data-tab="${pane.id}"]`);
-            if (activeButton) {
-                activeButton.classList.add('active');
-            }
-        } else {
-            pane.style.display = 'none'; // Sembunyikan panel lain
+    // Fungsi untuk menampilkan tab aktif dan menyembunyikan yang lain
+    function activateTab(targetTabId) {
+        // 1. Hapus kelas 'active' dari semua tombol
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        // 2. Sembunyikan semua panel tab
+        tabPanes.forEach(pane => {
+            pane.style.display = 'none';
+            pane.classList.remove('active');
+        });
+
+        // 3. Temukan tombol dan panel yang target
+        const targetButton = document.querySelector(`.tab-button[data-tab="${targetTabId}"]`);
+        const targetPane = document.getElementById(targetTabId);
+
+        if (targetButton && targetPane) {
+            // 4. Tambahkan kelas 'active' ke tombol yang diklik
+            targetButton.classList.add('active');
+            // 5. Tampilkan panel tab yang target dan tambahkan kelas 'active'
+            targetPane.style.display = 'block';
+            targetPane.classList.add('active');
+        }
+    }
+
+    // Cek apakah ada tab yang sudah memiliki kelas 'active' dari HTML
+    let defaultActiveTabId = null;
+    tabButtons.forEach(button => {
+        if (button.classList.contains('active')) {
+            defaultActiveTabId = button.dataset.tab;
         }
     });
 
-    // Jika tidak ada tab yang aktif secara default di HTML, aktifkan yang pertama
-    if (!activeTabFound && tabButtons.length > 0 && tabPanes.length > 0) {
-        tabButtons[0].classList.add('active');
-        tabPanes[0].style.display = 'block';
-        tabPanes[0].classList.add('active'); // Tambahkan juga kelas active ke pane
+    if (defaultActiveTabId) {
+        activateTab(defaultActiveTabId);
+    } else if (tabButtons.length > 0) {
+        // Jika tidak ada, aktifkan tab pertama secara default
+        activateTab(tabButtons[0].dataset.tab);
     }
 
-
+    // Tambahkan event listener ke setiap tombol tab
     tabButtons.forEach(button => {
         button.addEventListener('click', function() {
-            const targetTabId = this.dataset.tab;
-            const targetPane = document.getElementById(targetTabId);
-
-            // 1. Hapus kelas 'active' dari semua tombol
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-
-            // 2. Tambahkan kelas 'active' ke tombol yang diklik
-            this.classList.add('active');
-
-            // 3. Sembunyikan semua panel tab
-            tabPanes.forEach(pane => {
-                pane.style.display = 'none';
-                pane.classList.remove('active');
-            });
-
-            // 4. Tampilkan panel tab yang target dan tambahkan kelas 'active'
-            if (targetPane) {
-                targetPane.style.display = 'block';
-                targetPane.classList.add('active');
-            }
+            activateTab(this.dataset.tab);
         });
     });
 
-    console.log("Sistem tab sederhana siap!");
+    // Update tahun di footer secara otomatis
+    const yearSpan = document.getElementById('currentYear');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
+
+    console.log("Sistem tab dan footer siap!");
 });
