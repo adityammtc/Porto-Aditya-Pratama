@@ -38,9 +38,9 @@ a:hover {
 
 /* Header Sticky */
 .site-header {
-    position: sticky; /* Membuat header menempel di atas */
-    top: 0;           /* Posisi dari atas layar */
-    z-index: 1000;    /* Memastikan header di atas konten lain */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     background-color: #1a1a1a;
     padding: 20px 0;
     border-bottom: 2px solid #333333;
@@ -95,59 +95,52 @@ a:hover {
 .tab-content-area {
     padding-top: 30px;
     padding-bottom: 30px;
-    position: relative; /* Diperlukan agar panel anak bisa di-transform relatif terhadap ini */
+    position: relative; /* PENTING: Untuk positioning absolut anak-anaknya */
     overflow: hidden;   /* PENTING: Memotong konten panel yang bergerak keluar masuk */
+    min-height: 400px;  /* Beri tinggi agar tidak collapse jika konten belum ada */
 }
 
 .tab-pane {
-    /* Awalnya semua panel disembunyikan atau diposisikan di luar layar */
-    /* display: none; Akan dikontrol oleh JS */
     padding: 20px;
     background-color: #1e1e1e;
     border-radius: 8px;
-    margin-bottom: 20px; /* Ini mungkin tidak relevan jika panel selalu 'absolute' atau sejenisnya, tapi tidak apa-apa ada */
-
-    /* Properti untuk animasi slide */
-    opacity: 0; /* Mulai transparan */
-    transform: translateX(100%); /* Mulai dari sisi kanan luar layar */
-    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
     width: 100%; /* Pastikan panel mengisi lebar container */
     box-sizing: border-box; /* Agar padding tidak menambah lebar */
+
+    /* Properti transisi akan diterapkan saat kelas .active atau .is-exiting-* ditambahkan/dihapus */
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+
+    /* Awalnya semua panel (kecuali yang .active di HTML) akan diatur oleh JS */
+    /* display: none; akan diatur oleh JS */
+    /* opacity: 0; akan diatur oleh JS */
+    /* transform: translateX(100%); akan diatur oleh JS */
+    /* position: absolute; akan diatur oleh JS selama transisi */
 }
 
 .tab-pane.active {
-    display: block; /* Hanya panel aktif yang terlihat */
-    opacity: 1; /* Sepenuhnya terlihat */
-    transform: translateX(0); /* Berada di posisi normal (tengah) */
-    position: relative; /* Agar tidak mengganggu flow jika ada elemen lain setelahnya */
-                        /* dan agar z-index bekerja jika diperlukan */
-    z-index: 1; /* Agar panel aktif di atas panel yang sedang keluar */
+    /* Panel aktif akan menjadi terlihat dan di posisi normal */
+    display: block !important; /* Pastikan terlihat, !important jika ada konflik */
+    opacity: 1;
+    transform: translateX(0);
+    position: relative; /* Kembali ke flow normal dokumen */
+    z-index: 1; /* Di atas panel yang sedang keluar */
 }
 
-/* Kelas untuk animasi keluar panel saat ini */
+/* Kelas untuk animasi KELUAR panel saat ini */
 .tab-pane.is-exiting-left {
     /* Panel saat ini keluar ke kiri */
     transform: translateX(-100%);
     opacity: 0;
-    position: absolute; /* Agar tidak menggeser panel yang masuk */
-    top: 0; left: 0; /* Posisikan di dalam .tab-content-area */
-    z-index: 0; /* Di belakang panel yang masuk */
+    /* position: absolute; akan diatur oleh JS */
+    /* z-index: 0; akan diatur oleh JS */
 }
 
 .tab-pane.is-exiting-right {
     /* Panel saat ini keluar ke kanan */
     transform: translateX(100%);
     opacity: 0;
-    position: absolute; /* Agar tidak menggeser panel yang masuk */
-    top: 0; left: 0; /* Posisikan di dalam .tab-content-area */
-    z-index: 0; /* Di belakang panel yang masuk */
-}
-
-/* Kelas untuk mengatur posisi awal panel target sebelum animasi masuk */
-/* (Sebenarnya, transform awal sudah di .tab-pane, tapi ini untuk kasus masuk dari kiri) */
-.tab-pane.is-entering-from-left {
-    transform: translateX(-100%); /* Siap masuk dari kiri */
-    /* opacity: 0; sudah default di .tab-pane */
+    /* position: absolute; akan diatur oleh JS */
+    /* z-index: 0; akan diatur oleh JS */
 }
 
 
@@ -183,7 +176,7 @@ a:hover {
 .video-wrapper iframe,
 .video-wrapper video,
 .image-wrapper img,
-.model-container model-viewer {
+.model-container model-viewer { /* Pastikan tag model-viewer ada agar style ini berlaku */
     max-width: 100%;
     height: auto;
     display: block;
@@ -193,8 +186,8 @@ a:hover {
 
 .model-container model-viewer {
     width: 100%;
-    height: 400px;
-    background-color: #222;
+    height: 400px; /* Sesuaikan jika perlu */
+    background-color: #222; /* Latar belakang viewer */
 }
 
 .project-breakdown h3 {
@@ -223,5 +216,5 @@ a:hover {
     color: #aaaaaa;
     border-top: 2px solid #333333;
     font-size: 0.9em;
-    margin-top: 20px;
+    margin-top: 20px; /* Beri jarak dari konten utama */
 }
