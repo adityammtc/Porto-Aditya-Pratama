@@ -13,6 +13,10 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    display: flex; /* Membantu mengatur tinggi footer */
+    flex-direction: column; /* Susun vertikal */
+    min-height: 100vh; /* Pastikan container setidaknya setinggi viewport */
+    box-sizing: border-box;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -41,6 +45,7 @@ header {
     margin-bottom: 30px;
     padding-bottom: 20px;
     border-bottom: 2px solid #333333;
+    flex-shrink: 0; /* Header tidak menyusut */
 }
 
 header h1 {
@@ -50,6 +55,9 @@ header h1 {
 }
 
 /* Navigasi Tab */
+.tab-navigation {
+    flex-shrink: 0; /* Navigasi tidak menyusut */
+}
 .tab-navigation ul {
     list-style: none;
     padding: 0;
@@ -88,54 +96,35 @@ header h1 {
 
 /* Area Konten Tab - PENTING UNTUK SLIDE DAN SCROLL */
 .tab-content-area {
-    position: relative; /* Untuk positioning absolut anak-anaknya */
-    overflow: hidden;   /* Sembunyikan panel yang bergeser keluar area saat transisi */
+    position: relative;
+    overflow: hidden; /* Sembunyikan panel yang bergeser keluar area saat transisi */
     margin-top: 20px;
-    /* Biarkan tinggi area konten dinamis, panel aktif akan mengatur tingginya */
+    flex-grow: 1; /* Area konten mengisi sisa ruang vertikal */
+    display: flex; /* Untuk memastikan anak-anaknya (tab-pane) bisa diatur */
+    min-height: 350px; /* Tinggi minimal untuk area konten secara keseluruhan */
 }
 
 .tab-pane {
-    position: absolute; /* Semua panel berada di atas satu sama lain untuk transisi */
+    position: absolute;
     top: 0;
+    left: 100%; /* Default di kanan */
     width: 100%;
-    box-sizing: border-box; /* Padding dan border tidak menambah ukuran total */
-    padding: 30px 25px; /* Padding di dalam panel */
+    height: 100%; /* Mengisi tinggi parent (.tab-content-area) */
+    box-sizing: border-box;
+    padding: 30px 25px;
     background-color: #1e1e1e;
     border-radius: 8px;
-
-    /* Atur posisi awal di luar layar dan transisi */
-    left: 100%; /* Defaultnya, semua panel ada di kanan (kecuali yang aktif pertama) */
     opacity: 0;
     transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out;
-
-    /* Untuk scrolling di dalam tab jika konten panjang */
     overflow-y: auto; /* Aktifkan scroll vertikal jika perlu */
-    /* Tentukan tinggi maksimum agar scrollbar muncul di dalam panel.
-       SESUAIKAN NILAI 250px INI berdasarkan tinggi header, nav, footer, dan margin Anda! */
-    max-height: calc(100vh - 230px); /* Contoh: 100vh - (header_h1_approx_70 + nav_tab_approx_50 + footer_approx_60 + margins_approx_50) */
-    min-height: 300px; /* Tinggi minimal agar panel terlihat */
-
-    visibility: hidden; /* Sembunyikan panel non-aktif dari interaksi dan rendering */
+    visibility: hidden;
 }
 
 .tab-pane.active {
-    left: 0;     /* Panel aktif berada di tengah */
+    left: 0;
     opacity: 1;
-    z-index: 1; /* Pastikan panel aktif di atas yang lain */
-    visibility: visible; /* Panel aktif terlihat dan interaktif */
-}
-
-/* Kelas untuk animasi keluar tidak perlu diubah */
-.tab-pane.slide-out-left { /* Tidak digunakan di JS saat ini tapi bisa jika diperlukan */
-    left: -100%;
-    opacity: 0;
-    visibility: hidden;
-}
-
-.tab-pane.slide-out-right { /* Tidak digunakan di JS saat ini tapi bisa jika diperlukan */
-    left: 100%;
-    opacity: 0;
-    visibility: hidden;
+    z-index: 1;
+    visibility: visible;
 }
 
 .tab-pane h2 {
@@ -143,6 +132,7 @@ header h1 {
     border-bottom: 1px solid #444;
     padding-bottom: 10px;
     margin-bottom: 25px;
+    margin-top: 0; /* Hapus margin atas default h2 jika ada */
 }
 
 /* Styling untuk konten di dalam tab (placeholder, video, model, dll) */
@@ -200,7 +190,8 @@ footer {
     padding: 25px 5%;
     background-color: #1f1f1f;
     color: #aaaaaa;
-    margin-top: 50px;
+    margin-top: auto; /* Dorong footer ke bawah jika konten pendek */
     border-top: 2px solid #333333;
     font-size: 0.9em;
+    flex-shrink: 0; /* Footer tidak menyusut */
 }
