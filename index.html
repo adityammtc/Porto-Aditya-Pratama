@@ -3,74 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio 3D - [Nama Kamu]</title> <!-- Ganti [Nama Kamu] jika belum -->
+    <title>Portofolio 3D - [Nama Kamu]</title> <!-- Ganti [Nama Kamu] -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Portofolio 3D Saya</h1>
-        <nav>
-            <ul>
-                <!-- URUTAN NAVIGASI BARU -->
-                <li><a href="#video">Video Showcase</a></li>
-                <li><a href="#animasi3d">Model & Tekstur</a></li>
-                <li><a href="#uvmap">UV Map</a></li>
-                <li><a href="#tentang">Tentang</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="portfolio-container">
+        <header>
+            <h1>Portofolio 3D Saya</h1>
+            <nav class="tab-navigation">
+                <ul>
+                    <!-- Tombol Tab -->
+                    <li><button class="tab-button active" data-tab="featured">Featured Project</button></li>
+                    <li><button class="tab-button" data-tab="videos">All Videos</button></li>
+                    <li><button class="tab-button" data-tab="models">3D Models</button></li>
+                    <li><button class="tab-button" data-tab="about">About Me</button></li>
+                </ul>
+            </nav>
+        </header>
 
-    <main>
-        <!-- SECTION VIDEO PINDAH KE ATAS -->
-        <section id="video">
-            <h2>Video Showcase Animasi</h2>
-            <p>Berikut adalah beberapa karya animasi yang telah saya render.</p>
-            <div class="video-wrapper">
-                <!-- Video akan disisipkan di sini -->
-                <p style="padding: 20px; color: #777;">Area untuk Video Animasi</p>
-                <!-- Contoh placeholder video, ganti dengan video kamu nanti:
-                <video controls width="100%">
-                    <source src="assets/videos/nama_video_kamu.mp4" type="video/mp4">
-                    Browser Anda tidak mendukung tag video.
-                </video>
-                -->
-            </div>
-        </section>
+        <main class="tab-content-area">
+            <!-- Panel Konten untuk Tab "Featured Project" -->
+            <section id="featured" class="tab-pane active">
+                <h2>Featured Project Showcase</h2>
+                <p>Ini adalah proyek unggulan saya, menampilkan proses lengkap dari animasi, model, tekstur, hingga UV map.</p>
 
-        <!-- SECTION MODEL 3D SETELAH VIDEO -->
-        <section id="animasi3d">
-            <h2>Model 3D Interaktif & Tekstur</h2>
-            <p>Putar, zoom, dan lihat detail tekstur pada model 3D berikut. Beberapa model mungkin memiliki animasi bawaan.</p>
-            <div class="model-container" id="model-viewer-container">
-                <!-- Model 3D akan dimuat di sini menggunakan JavaScript -->
-                <p style="padding: 20px; color: #777;">Area untuk Model 3D</p>
-            </div>
-        </section>
+                <article class="project-breakdown">
+                    <h3>Video Animasi Utama</h3>
+                    <div class="video-wrapper placeholder-content">
+                        <p>Area untuk Video Animasi Unggulan</p>
+                        <!-- <video controls width="100%"><source src="path/to/featured_video.mp4" type="video/mp4"></video> -->
+                    </div>
 
-        <!-- SECTION UV MAP SETELAH MODEL 3D -->
-        <section id="uvmap">
-            <h2>Contoh Pemangkasan UV (UV Unwrapping)</h2>
-            <p>Ini adalah tampilan UV map dari salah satu model saya, menunjukkan bagaimana tekstur dipetakan ke permukaan 3D.</p>
-            <div class="image-wrapper">
-                <!-- Gambar UV Map akan disisipkan di sini -->
-                <p style="padding: 20px; color: #777;">Area untuk Gambar UV Map</p>
-                <!-- Contoh placeholder gambar, ganti dengan gambar kamu nanti:
-                <img src="assets/images/nama_uvmap_kamu.jpg" alt="Contoh UV Map Model" class="uv-map-image">
-                -->
-            </div>
-        </section>
+                    <h3>Detail Model 3D & Tekstur</h3>
+                    <div class="model-container placeholder-content" id="featured-model-viewer">
+                         <p>Area untuk Model 3D Unggulan</p>
+                    </div>
 
-        <section id="tentang">
-            <h2>Tentang Saya</h2>
-            <p>Halo! Saya [Nama Kamu], seorang seniman 3D yang berfokus pada [Sebutkan Spesialisasimu, misal: karakter modeling, environment design, product visualization]. Saya menikmati proses kreatif dari konsep hingga hasil akhir. Silakan lihat karya-karya saya!</p>
-            <p>Hubungi saya di: <a href="mailto:emailkamu@example.com">emailkamu@example.com</a></p> <!-- Ganti email kamu jika belum -->
-        </section>
-    </main>
+                    <h3>Pemangkasan UV (UV Unwrapping)</h3>
+                    <div class="image-wrapper placeholder-content">
+                        <p>Area untuk UV Map Proyek Unggulan</p>
+                        <!-- <img src="path/to/featured_uvmap.jpg" alt="UV Map Featured Project" class="uv-map-image"> -->
+                    </div>
+                </article>
+            </section>
 
-    <footer>
-        <p>© 2024 [Nama Kamu]. All Rights Reserved.</p> <!-- Ganti [Nama Kamu] jika belum -->
-    </footer>
+            <!-- Panel Konten untuk Tab "All Videos" -->
+            <section id="videos" class="tab-pane">
+                <h2>Koleksi Video Animasi</h2>
+                <p>Berikut adalah beberapa video animasi lain yang telah saya kerjakan.</p>
+                <div class="gallery">
+                    <div class="video-wrapper placeholder-content gallery-item">
+                        <p>Video 1</p>
+                        <!-- <video controls width="100%"><source src="path/to/video1.mp4" type="video/mp4"></video> -->
+                    </div>
+                    <div class="video-wrapper placeholder-content gallery-item">
+                        <p>Video 2</p>
+                        <!-- <video controls width="100%"><source src="path/to/video2.mp4" type="video/mp4"></video> -->
+                    </div>
+                    <!-- Tambahkan lebih banyak video di sini -->
+                </div>
+            </section>
 
+            <!-- Panel Konten untuk Tab "3D Models" -->
+            <section id="models" class="tab-pane">
+                <h2>Galeri Model 3D</h2>
+                <p>Kumpulan model 3D yang pernah saya buat. Fokus pada bentuk dan detail modeling.</p>
+                <div class="gallery">
+                    <div class="model-container placeholder-content gallery-item" id="general-model-1">
+                        <p>Model 3D Umum 1</p>
+                    </div>
+                    <div class="model-container placeholder-content gallery-item" id="general-model-2">
+                        <p>Model 3D Umum 2</p>
+                    </div>
+                    <!-- Tambahkan lebih banyak model di sini -->
+                </div>
+            </section>
+
+            <!-- Panel Konten untuk Tab "About Me" -->
+            <section id="about" class="tab-pane">
+                <h2>Tentang Saya</h2>
+                <p>Halo! Saya [Nama Kamu], seorang seniman 3D dengan passion di [Sebutkan Spesialisasimu]. Saya selalu antusias untuk belajar dan menciptakan visual yang menarik.</p>
+                <p>Pengalaman saya meliputi [sebutkan beberapa pengalaman atau software yang dikuasai].</p>
+                <p>Hubungi saya melalui: <a href="mailto:emailkamu@example.com">emailkamu@example.com</a></p> <!-- Ganti email kamu -->
+                <!-- Tambahkan link media sosial jika ada -->
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2024 [Nama Kamu]. All Rights Reserved.</p> <!-- Ganti [Nama Kamu] -->
+        </footer>
+    </div> <!-- Akhir .portfolio-container -->
+
+    <!-- Script untuk Model Viewer (jika digunakan) dan logika tab -->
+    <!-- <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script> -->
     <script src="script.js"></script>
 </body>
 </html>
