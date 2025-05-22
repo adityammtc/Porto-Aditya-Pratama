@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portofolio 3D - [Nama Kamu]</title> <!-- GANTI [Nama Kamu] dengan namamu -->
     <link rel="stylesheet" href="style.css">
-    <!-- MULAI: Tambahkan script model-viewer -->
+    <!-- PASTIKAN BARIS INI ADA DAN BENAR -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-    <!-- AKHIR: Tambahkan script model-viewer -->
 </head>
 <body>
     <div class="portfolio-container">
@@ -31,7 +30,7 @@
 
                 <article class="project-breakdown">
                     <h3>Video Animasi Utama</h3>
-                    <div class="video-wrapper"> <!-- Hapus placeholder-content jika sudah ada video -->
+                    <div class="video-wrapper">
                         <video controls loop preload="metadata" playsinline>
                             <source src="assets/final 2.mp4" type="video/mp4">
                             Browser Anda tidak mendukung tag video.
@@ -40,25 +39,22 @@
                     <p>Deskripsi detail tentang video animasi unggulan. Jelaskan konsep, durasi, dan peranmu dalam pembuatannya.</p>
 
                     <h3>Detail Model 3D & Tekstur</h3>
-                    <!-- MULAI: Ganti placeholder dengan model-viewer -->
                     <div class="model-container" id="featured-model-viewer">
                          <model-viewer
-                            src="assets/model_unggulan.glb" <!-- GANTI DENGAN NAMA FILE .GLB KAMU -->
+                            src="assets/model_unggulan.glb" <!-- GANTI DENGAN NAMA FILE .GLB KAMU YANG VALID -->
                             alt="Deskripsi model 3D unggulan kamu"
                             auto-rotate
                             camera-controls
-                            environment-image="neutral" <!-- Pencahayaan dasar, bisa diganti atau dihapus -->
+                            environment-image="neutral"
                             shadow-intensity="1"
-                            ar <!-- Opsional: untuk fitur Augmented Reality -->
-                            ar-modes="webxr scene-viewer quick-look" <!-- Opsional: mode AR -->
                             style="width: 100%; height: 400px; background-color: #222;">
                             <!-- Pesan loading (opsional) -->
                             <div class="progress-bar hide" slot="progress-bar">
+                                <span>Loading...</span>
                                 <div class="update-bar"></div>
                             </div>
                          </model-viewer>
                     </div>
-                    <!-- AKHIR: Ganti placeholder dengan model-viewer -->
                      <p>Deskripsi detail tentang model 3D unggulan, proses pembuatan, software yang digunakan, dan inspirasi.</p>
                      <p>Jelaskan tantangan yang dihadapi dan bagaimana kamu mengatasinya. Tekankan pada kualitas tekstur dan detail model.</p>
 
@@ -76,18 +72,10 @@
                 <h2>Koleksi Video Animasi</h2>
                 <p>Berikut adalah beberapa video animasi lain yang telah saya kerjakan.</p>
                 <div class="gallery">
-                    <div class="video-wrapper gallery-item"> <!-- Hapus placeholder-content jika sudah ada video -->
-                        <!-- <video controls loop preload="metadata" playsinline>
-                            <source src="assets/video_lain_1.mp4" type="video/mp4">
-                            Browser Anda tidak mendukung tag video.
-                        </video> -->
+                    <div class="video-wrapper gallery-item">
                         <p>Video 1 (placeholder)</p>
                     </div>
-                    <div class="video-wrapper gallery-item"> <!-- Hapus placeholder-content jika sudah ada video -->
-                        <!-- <video controls loop preload="metadata" playsinline>
-                            <source src="assets/video_lain_2.mp4" type="video/mp4">
-                            Browser Anda tidak mendukung tag video.
-                        </video> -->
+                    <div class="video-wrapper gallery-item">
                         <p>Video 2 (placeholder)</p>
                     </div>
                 </div>
@@ -99,32 +87,40 @@
                 <h2>Galeri Model 3D</h2>
                 <p>Kumpulan model 3D yang pernah saya buat. Fokus pada bentuk dan detail modeling.</p>
                 <div class="gallery">
-                    <!-- MULAI: Contoh model-viewer lain di galeri -->
+                    <!-- ITEM MODEL 1 -->
                     <div class="model-container gallery-item" id="general-model-1">
-                        <model-viewer
-                            src="assets/nama_model_lain_1.glb" <!-- GANTI DENGAN NAMA FILE .GLB KAMU -->
+                         <model-viewer
+                            src="assets/nama_model_lain_1.glb" <!-- GANTI INI DENGAN NAMA FILE .GLB KAMU YANG VALID -->
                             alt="Deskripsi model 3D umum 1"
                             camera-controls
                             auto-rotate
                             environment-image="neutral"
                             shadow-intensity="1"
                             style="width: 100%; height: 300px; background-color: #222;">
+                            <!-- Pesan loading (opsional) -->
+                            <div class="progress-bar hide" slot="progress-bar">
+                                <span>Loading...</span>
+                                <div class="update-bar"></div>
+                            </div>
                          </model-viewer>
-                        <!-- <p>Model 3D Umum 1</p> -->
                     </div>
+                    <!-- ITEM MODEL 2 -->
                     <div class="model-container gallery-item" id="general-model-2">
                         <model-viewer
-                            src="assets/nama_model_lain_2.glb" <!-- GANTI DENGAN NAMA FILE .GLB KAMU -->
+                            src="assets/nama_model_lain_2.glb" <!-- GANTI INI DENGAN NAMA FILE .GLB KAMU YANG VALID -->
                             alt="Deskripsi model 3D umum 2"
                             camera-controls
                             auto-rotate
                             environment-image="neutral"
                             shadow-intensity="1"
                             style="width: 100%; height: 300px; background-color: #222;">
+                            <!-- Pesan loading (opsional) -->
+                            <div class="progress-bar hide" slot="progress-bar">
+                                <span>Loading...</span>
+                                <div class="update-bar"></div>
+                            </div>
                         </model-viewer>
-                        <!-- <p>Model 3D Umum 2</p> -->
                     </div>
-                    <!-- AKHIR: Contoh model-viewer lain di galeri -->
                 </div>
                 <p>Berikan konteks untuk model-model ini, apakah itu aset game, visualisasi produk, atau karya seni pribadi.</p>
             </section>
