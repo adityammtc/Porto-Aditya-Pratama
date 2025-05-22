@@ -1,61 +1,82 @@
 document.addEventListener('DOMContentLoaded', function() {
     const tabButtons = Array.from(document.querySelectorAll('.tab-button'));
     const tabPanes = Array.from(document.querySelectorAll('.tab-pane'));
+    let currentActiveButton = tabButtons.find(button => button.classList.contains('active'));
     let currentActivePane = tabPanes.find(pane => pane.classList.contains('active'));
 
-    // Inisialisasi: Pastikan hanya panel aktif awal yang terlihat
+    // Inisialisasi
     tabPanes.forEach(pane => {
-        if (pane === currentActivePane) {
-            pane.style.display = 'block'; // Langsung block
-            // Set opacity ke 1 setelah sedikit delay agar transisi terlihat saat load pertama (jika diinginkan)
-            // setTimeout(() => { pane.style.opacity = '1'; }, 50); // Optional, bisa juga langsung opacity 1
-            pane.style.opacity = '1'; // Atau langsung saja
+        if (pane !== currentActivePane) {
+            pane.style.display = 'none'; // Pastikan hanya panel aktif yang display block awal
+            // Posisi transform awal sudah diatur di CSS
         } else {
-            pane.style.display = 'none';
-            pane.style.opacity = '0';
+            pane.style.display = 'block';
+            // Agar transisi masuk tidak terjadi saat load pertama, kita set langsung
+            pane.style.transform = 'translateX(0)';
+            pane.style.opacity = '1';
         }
     });
 
     function showTab(targetTabId) {
+        const targetButton = tabButtons.find(button => button.dataset.tab === targetTabId);
         const targetPane = document.getElementById(targetTabId);
 
-        if (!targetPane || targetPane === currentActivePane) {
-            return; // Jika panel tidak ada atau sama dengan yang aktif, tidak ada aksi
+        if (!targetPane || targetPane === currentActivePane || !targetButton) {
+            return;
         }
 
-        // Sembunyikan panel yang aktif saat ini (fade out)
+        const currentIndex = tabButtons.indexOf(currentActiveButton);
+        const targetIndex = tabButtons.indexOf(targetButton);
+
+        // 1. Animasikan keluar panel saat ini
         if (currentActivePane) {
-            currentActivePane.style.opacity = '0';
-            // Tunggu transisi fade out selesai sebelum mengganti display ke none
-            currentActivePane.addEventListener('transitionend', function handleTransitionEnd() {
-                if (this.style.opacity === '0') { // Pastikan ini karena fade out
-                    this.style.display = 'none';
-                    this.classList.remove('active');
-                }
-                this.removeEventListener('transitionend', handleTransitionEnd);
+            currentActivePane.classList.remove('active'); // Hapus active agar tidak mengganggu
+            if (targetIndex > currentIndex) { // Target ada di kanan, panel saat ini keluar ke kiri
+                currentActivePane.classList.add('is-exiting-left');
+            } else { // Target ada di kiri, panel saat ini keluar ke kanan
+                currentActivePane.classList.add('is-exiting-right');
+            }
+
+            // Setelah animasi keluar selesai, sembunyikan panel lama
+            currentActivePane.addEventListener('transitionend', function handleExitTransition() {
+                this.style.display = 'none';
+                this.classList.remove('is-exiting-left', 'is-exiting-right');
+                // Kembalikan ke posisi transform default (untuk masuk dari kanan lain kali)
+                this.style.transform = 'translateX(100%)';
+                this.removeEventListener('transitionend', handleExitTransition);
             });
         }
 
-        // Tampilkan panel target (fade in)
-        targetPane.style.display = 'block';
-        targetPane.classList.add('active');
-        // Beri sedikit waktu agar display:block diterapkan sebelum transisi opacity
+        // 2. Siapkan panel target untuk masuk
+        // Hapus kelas exiting jika ada (dari interaksi cepat sebelumnya)
+        targetPane.classList.remove('is-exiting-left', 'is-exiting-right');
+
+        if (targetIndex > currentIndex) { // Target dari kanan (default)
+            targetPane.classList.remove('is-entering-from-left'); // Pastikan tidak dari kiri
+            targetPane.style.transform = 'translateX(100%)'; // Posisi awal di kanan
+        } else { // Target dari kiri
+            targetPane.classList.add('is-entering-from-left');
+            targetPane.style.transform = 'translateX(-100%)'; // Posisi awal di kiri
+        }
+        targetPane.style.opacity = '0'; // Pastikan transparan sebelum masuk
+        targetPane.style.display = 'block'; // Jadikan block agar bisa dianimasikan
+
+        // 3. Animasikan masuk panel target
+        // Beri sedikit waktu browser untuk render display:block dan transform awal
         requestAnimationFrame(() => {
             requestAnimationFrame(() => { // Double rAF untuk kestabilan
-                 targetPane.style.opacity = '1';
+                targetPane.classList.add('active'); // Ini akan memicu transform: translateX(0) dan opacity: 1 dari CSS
+                targetPane.classList.remove('is-entering-from-left'); // Hapus kelas helper
             });
         });
 
 
         // Update tombol aktif
-        tabButtons.forEach(button => {
-            button.classList.remove('active');
-            if (button.dataset.tab === targetTabId) {
-                button.classList.add('active');
-            }
-        });
+        if (currentActiveButton) currentActiveButton.classList.remove('active');
+        targetButton.classList.add('active');
 
-        currentActivePane = targetPane; // Update panel aktif saat ini
+        currentActiveButton = targetButton;
+        currentActivePane = targetPane;
     }
 
     tabButtons.forEach(button => {
@@ -65,5 +86,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    console.log("Sistem tab portofolio dengan header sticky dan fade transition siap!");
+    console.log("Sistem tab dengan header sticky dan simulasi slide (transform) siap!");
 });
