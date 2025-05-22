@@ -1,78 +1,72 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const tabButtons = Array.from(document.querySelectorAll('.tab-button')); // Ubah NodeList jadi Array
-    const tabPanes = Array.from(document.querySelectorAll('.tab-pane'));   // Ubah NodeList jadi Array
-    let currentActiveIndex = tabButtons.findIndex(button => button.classList.contains('active'));
+    const tabButtons = Array.from(document.querySelectorAll('.tab-button'));
+    const tabPanes = Array.from(document.querySelectorAll('.tab-pane'));
+    let currentActiveIndex = -1;
 
-    // Jika tidak ada yang aktif di HTML, set yang pertama sebagai aktif
-    if (currentActiveIndex === -1 && tabButtons.length > 0) {
+    // Tentukan tab aktif awal dari HTML atau default ke yang pertama
+    const initiallyActiveButton = tabButtons.find(button => button.classList.contains('active'));
+    if (initiallyActiveButton) {
+        currentActiveIndex = tabButtons.indexOf(initiallyActiveButton);
+    } else if (tabButtons.length > 0) {
+        currentActiveIndex = 0; // Default ke tab pertama jika tidak ada yang aktif di HTML
         tabButtons[0].classList.add('active');
-        tabPanes[0].classList.add('active');
-        currentActiveIndex = 0;
     }
 
-    // Atur posisi awal panel yang tidak aktif (selain yang pertama)
-    // Ini penting karena kita tidak lagi menggunakan display:none
+    // Inisialisasi posisi dan status panel
     tabPanes.forEach((pane, index) => {
-        if (index !== currentActiveIndex) {
+        if (index === currentActiveIndex) {
+            pane.style.left = '0';
+            pane.style.opacity = '1';
+            pane.classList.add('active'); // Pastikan kelas 'active' ada untuk styling visibility & max-height
+        } else {
             pane.style.left = '100%'; // Default di kanan
             pane.style.opacity = '0';
-        } else {
-            pane.style.left = '0'; // Panel aktif pertama di tengah
-            pane.style.opacity = '1';
+            pane.classList.remove('active'); // Pastikan tidak ada 'active' di panel lain
         }
     });
 
-
     function showTab(targetIndex) {
-        if (targetIndex === currentActiveIndex) return; // Jika tab yang sama diklik, tidak ada aksi
+        if (targetIndex === currentActiveIndex || targetIndex < 0 || targetIndex >= tabPanes.length) {
+            return; // Tidak ada aksi jika tab sama, atau indeks tidak valid
+        }
 
         const currentPane = tabPanes[currentActiveIndex];
         const targetPane = tabPanes[targetIndex];
         const currentButton = tabButtons[currentActiveIndex];
         const targetButton = tabButtons[targetIndex];
 
-        // Hapus kelas aktif dari tombol dan panel saat ini
+        // Nonaktifkan tombol dan panel saat ini
         currentButton.classList.remove('active');
-        // currentPane.classList.remove('active'); // Kita akan atur left dan opacity manual
+        currentPane.classList.remove('active'); // Ini akan memicu visibility: hidden dll.
 
-        // Tambah kelas aktif ke tombol dan panel target
+        // Segera aktifkan tombol target
         targetButton.classList.add('active');
-        // targetPane.classList.add('active'); // Kita akan atur left dan opacity manual
 
-        // Tentukan arah slide
-        if (targetIndex > currentActiveIndex) { // Slide ke kiri (panel baru datang dari kanan)
-            // Panel saat ini keluar ke kiri
-            currentPane.style.left = '-100%';
+        // Tentukan arah slide dan siapkan panel target di luar layar
+        if (targetIndex > currentActiveIndex) { // Panel baru datang dari kanan
+            currentPane.style.left = '-100%'; // Panel saat ini keluar ke kiri
             currentPane.style.opacity = '0';
 
-            // Panel target masuk dari kanan
-            targetPane.style.left = '100%'; // Pastikan posisi awal sebelum transisi
-            targetPane.style.opacity = '0'; // Mulai transparan
-            // Beri sedikit waktu browser untuk render posisi awal sebelum transisi
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => { // Double requestAnimationFrame untuk kestabilan
-                    targetPane.style.left = '0';
-                    targetPane.style.opacity = '1';
-                });
-            });
-
-        } else { // Slide ke kanan (panel baru datang dari kiri)
-            // Panel saat ini keluar ke kanan
-            currentPane.style.left = '100%';
-            currentPane.style.opacity = '0';
-
-            // Panel target masuk dari kiri
-            targetPane.style.left = '-100%'; // Pastikan posisi awal
+            targetPane.style.left = '100%';   // Panel target mulai dari kanan
             targetPane.style.opacity = '0';
-             requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    targetPane.style.left = '0';
-                    targetPane.style.opacity = '1';
-                });
-            });
+        } else { // Panel baru datang dari kiri
+            currentPane.style.left = '100%';  // Panel saat ini keluar ke kanan
+            currentPane.style.opacity = '0';
+
+            targetPane.style.left = '-100%';  // Panel target mulai dari kiri
+            targetPane.style.opacity = '0';
         }
 
-        // Update indeks aktif saat ini
+        // Beri sedikit waktu browser untuk memproses posisi awal sebelum transisi
+        requestAnimationFrame(() => {
+            // Sekarang set kelas 'active' pada panel target dan geser ke posisi akhir
+            // Ini penting agar styling seperti max-height dari kelas .active diterapkan
+            // bersamaan dengan dimulainya transisi masuk.
+            targetPane.classList.add('active');
+            targetPane.style.left = '0';
+            targetPane.style.opacity = '1';
+        });
+
         currentActiveIndex = targetIndex;
     }
 
@@ -82,5 +76,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    console.log("Sistem tab portofolio dengan slide siap!");
+    console.log("Sistem tab portofolio dengan slide kiri-kanan dan scroll internal siap!");
 });
