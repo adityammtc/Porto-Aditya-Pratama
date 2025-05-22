@@ -1,0 +1,93 @@
+body {
+    font-family: 'Arial', sans-serif; /* Jenis font dasar */
+    line-height: 1.6; /* Jarak antar baris */
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* Warna latar belakang halaman */
+    color: #333; /* Warna teks dasar */
+}
+
+header {
+    background-color: #333; /* Warna latar belakang header */
+    color: #fff; /* Warna teks di header */
+    padding: 1rem 0; /* Jarak di dalam header (atas/bawah kiri/kanan) */
+    text-align: center; /* Teks di header rata tengah */
+}
+
+header h1 {
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+header nav ul {
+    padding: 0;
+    list-style: none; /* Menghilangkan bullet point pada daftar */
+}
+
+header nav ul li {
+    display: inline; /* Membuat item menu berjajar horizontal */
+    margin: 0 15px; /* Jarak antar item menu */
+}
+
+header nav ul li a {
+    color: #fff; /* Warna link di navigasi */
+    text-decoration: none; /* Menghilangkan garis bawah pada link */
+    font-weight: bold;
+}
+
+header nav ul li a:hover {
+    color: #ffa500; /* Warna link saat kursor di atasnya (hover) */
+}
+
+main {
+    width: 80%; /* Lebar konten utama */
+    margin: 20px auto; /* Membuat konten utama berada di tengah halaman */
+    padding: 20px;
+    background-color: #fff; /* Warna latar belakang konten utama */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Memberi bayangan halus */
+    border-radius: 8px; /* Membuat sudut sedikit melengkung */
+}
+
+section {
+    padding: 20px 0; /* Jarak di dalam section (atas/bawah) */
+    border-bottom: 1px dotted #ccc; /* Garis putus-putus sebagai pemisah antar section */
+}
+
+section:last-child {
+    border-bottom: none; /* Menghilangkan garis pemisah di section terakhir */
+}
+
+section h2 {
+    color: #333; /* Warna sub-judul */
+    margin-top: 0;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #222; /* Warna latar belakang footer */
+    color: #fff; /* Warna teks di footer */
+    margin-top: 30px;
+}
+
+/* Placeholder untuk styling model 3D, gambar, dan video nanti */
+.model-container {
+    width: 100%;
+    height: 400px; /* Sesuaikan tinggi sesuai kebutuhan */
+    background-color: #e0e0e0; /* Warna latar placeholder */
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.uv-map-image, .animation-video {
+    max-width: 100%; /* Membuat gambar/video responsif */
+    height: auto; /* Menjaga rasio aspek */
+    display: block; /* Menghilangkan spasi ekstra di bawah gambar/video */
+    margin: 10px auto; /* Memberi sedikit jarak dan memusatkan */
+    border: 1px solid #ddd;
+    padding: 5px;
+    background-color: #fff;
+}
