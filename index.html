@@ -3,58 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio 3D Saya</title>
+    <title>Portofolio 3D - [Nama Kamu]</title> <!-- Ganti [Nama Kamu] -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Selamat Datang di Portofolio 3D Saya</h1>
+        <h1>Portofolio 3D Saya</h1>
         <nav>
             <ul>
-                <li><a href="#tentang">Tentang Saya</a></li>
-                <li><a href="#model3d">Model 3D</a></li>
+                <!-- Kita akan sesuaikan link ini agar smooth scroll nanti jika perlu -->
+                <li><a href="#animasi3d">Model & Tekstur</a></li>
+                <li><a href="#video">Video Showcase</a></li>
                 <li><a href="#uvmap">UV Map</a></li>
-                <li><a href="#animasi">Animasi</a></li>
-                <li><a href="#kontak">Kontak</a></li>
+                <li><a href="#tentang">Tentang</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section id="tentang">
-            <h2>Tentang Saya</h2>
-            <p>Halo! Saya seorang seniman 3D yang bersemangat dengan pembuatan model, tekstur, dan animasi. Selamat menikmati karya-karya saya!</p>
+        <section id="animasi3d">
+            <h2>Model 3D Interaktif & Tekstur</h2>
+            <p>Putar, zoom, dan lihat detail tekstur pada model 3D berikut. Beberapa model mungkin memiliki animasi bawaan.</p>
+            <div class="model-container" id="model-viewer-container">
+                <!-- Model 3D akan dimuat di sini menggunakan JavaScript -->
+                <p style="padding: 20px; color: #777;">Area untuk Model 3D</p>
+            </div>
         </section>
 
-        <section id="model3d">
-            <h2>Model 3D Unggulan</h2>
-            <p>Di bagian ini, saya akan menampilkan model 3D interaktif yang memperlihatkan detail tekstur.</p>
-            <!-- Konten model 3D akan ditambahkan di sini -->
+        <section id="video">
+            <h2>Video Showcase Animasi</h2>
+            <p>Berikut adalah beberapa karya animasi yang telah saya render.</p>
+            <div class="video-wrapper">
+                <!-- Video akan disisipkan di sini -->
+                <p style="padding: 20px; color: #777;">Area untuk Video Animasi</p>
+                <!-- Contoh placeholder video, ganti dengan video kamu nanti:
+                <video controls width="100%">
+                    <source src="assets/videos/nama_video_kamu.mp4" type="video/mp4">
+                    Browser Anda tidak mendukung tag video.
+                </video>
+                -->
+            </div>
         </section>
 
         <section id="uvmap">
             <h2>Contoh Pemangkasan UV (UV Unwrapping)</h2>
-            <p>Berikut adalah contoh bagaimana UV map dari salah satu model saya terlihat.</p>
-            <!-- Gambar UV map akan ditambahkan di sini -->
+            <p>Ini adalah tampilan UV map dari salah satu model saya, menunjukkan bagaimana tekstur dipetakan ke permukaan 3D.</p>
+            <div class="image-wrapper">
+                <!-- Gambar UV Map akan disisipkan di sini -->
+                <p style="padding: 20px; color: #777;">Area untuk Gambar UV Map</p>
+                <!-- Contoh placeholder gambar, ganti dengan gambar kamu nanti:
+                <img src="assets/images/nama_uvmap_kamu.jpg" alt="Contoh UV Map Model" class="uv-map-image">
+                -->
+            </div>
         </section>
 
-        <section id="animasi">
-            <h2>Video Animasi</h2>
-            <p>Lihat beberapa animasi yang telah saya buat.</p>
-            <!-- Video animasi akan ditambahkan di sini -->
-        </section>
-
-        <section id="kontak">
-            <h2>Hubungi Saya</h2>
-            <p>Anda bisa menghubungi saya melalui email di: [email protected]</p>
-            <!-- Tambahkan link ke media sosial jika ada -->
+        <section id="tentang">
+            <h2>Tentang Saya</h2>
+            <p>Halo! Saya [Nama Kamu], seorang seniman 3D yang berfokus pada [Sebutkan Spesialisasimu, misal: karakter modeling, environment design, product visualization]. Saya menikmati proses kreatif dari konsep hingga hasil akhir. Silakan lihat karya-karya saya!</p>
+            <!-- Tambahkan info kontak jika mau di sini atau di footer -->
+            <p>Hubungi saya di: <a href="mailto:emailkamu@example.com">emailkamu@example.com</a></p> <!-- Ganti email kamu -->
         </section>
     </main>
 
     <footer>
-        <p>© 2024 Nama Kamu. Hak Cipta Dilindungi.</p>
+        <p>© 2024 [Nama Kamu]. All Rights Reserved.</p> <!-- Ganti [Nama Kamu] -->
     </footer>
-<script src="script.js"></script>
-    <!-- Kita akan menambahkan link ke file JavaScript di sini nanti -->
+
+    <!-- Script untuk Model Viewer (atau library lain) akan kita tambahkan nanti -->
+    <script src="script.js"></script>
 </body>
 </html>
