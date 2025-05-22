@@ -12,7 +12,7 @@ body {
 .portfolio-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px; /* Padding kiri-kanan untuk kontainer utama */
+    padding: 0 20px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -61,7 +61,7 @@ a:hover {
     display: flex;
     justify-content: center;
     gap: 10px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Tambahkan ini agar tombol bisa wrap jika layar kecil */
 }
 
 .tab-navigation .tab-button {
@@ -75,7 +75,7 @@ a:hover {
     border-radius: 6px;
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
     outline: none;
-    margin-bottom: 5px;
+    margin-bottom: 5px; /* Tambahkan margin bawah untuk tombol yang wrap */
 }
 
 .tab-navigation .tab-button:hover {
@@ -100,8 +100,7 @@ a:hover {
 
 .tab-pane {
     display: none;
-    /* --- KEMBALIKAN SEDIKIT PADDING HORIZONTAL --- */
-    padding: 20px 20px; /* Misalnya 20px atas-bawah, 20px kiri-kanan. Sesuaikan! */
+    padding: 20px;
     background-color: #1e1e1e;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -113,18 +112,8 @@ a:hover {
     display: block;
 }
 
-/* Hapus padding individual jika .tab-pane sudah punya padding */
-.tab-pane h2,
-.tab-pane > p,
-.project-breakdown > p,
-#texturing > p,
-#editing > p,
-#animation > p {
-    padding-left: 0; /* Reset padding jika .tab-pane sudah menangani */
-    padding-right: 0;/* Reset padding jika .tab-pane sudah menangani */
-}
-
 .tab-pane h2 {
+    font-size: 2.2em;
     border-bottom: 1px solid #444;
     padding-bottom: 10px;
     margin-bottom: 25px;
@@ -136,18 +125,15 @@ a:hover {
     margin-bottom: 10px;
     font-size: 1.5em;
     color: #f0f0f0;
-    padding-left: 0; /* Reset padding */
-    padding-right: 0;/* Reset padding */
 }
 
-/* Styling untuk Video Wrapper (Umum) */
+/* Styling untuk Video Wrapper (Umum dan Featured Project) */
 .video-wrapper {
-    width: 100%; /* Mengambil lebar penuh dari parent (.gallery-item atau .project-breakdown) */
-    /* --- SESUAIKAN MAX-WIDTH UNTUK VIDEO UMUM --- */
-    max-width: 800px; /* Batasi lebar maksimum video agar tidak terlalu lebar, tapi lebih lebar dari sebelumnya. Sesuaikan! */
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #2a2a2a; /* Background untuk area video jika video tidak mengisi penuh */
+    width: 100%; /* Untuk video di featured project agar full width */
+    max-width: 800px; /* Batasi lebar maksimum video agar tidak terlalu besar di layar lebar */
+    margin-left: auto; /* Pusatkan video jika max-width tercapai */
+    margin-right: auto; /* Pusatkan video jika max-width tercapai */
+    background-color: #2a2a2a;
     border-radius: 6px;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -156,90 +142,114 @@ a:hover {
 }
 
 .video-wrapper video {
-    max-width: 100%; /* Video akan mengisi lebar .video-wrapper */
+    max-width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto; /* Video di tengah wrapper-nya */
-    border-radius: 4px; /* Sedikit radius di video itu sendiri */
+    margin: 0 auto; /* Pastikan video di tengah wrapper */
+    border-radius: 4px;
 }
 
 .video-caption {
     font-size: 0.9em;
     color: #ccc;
     text-align: center;
-    padding: 8px 0 0 0; /* Padding atas untuk jarak dari video */
+    padding: 8px 0 0 0;
     margin-bottom: 0;
 }
+
+
+/* Styling untuk Image Wrapper (UV Map) - Dihapus dari penggunaan, tapi biarkan jika diperlukan nanti */
+.image-wrapper {
+    width: 100%;
+    background-color: #2a2a2a;
+    border-radius: 6px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    padding: 15px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.image-wrapper img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+    border-radius: 4px;
+}
+.image-wrapper p {
+    color: #888;
+    margin: 0;
+}
+
 
 /* Styling untuk Model Sketchfab di Featured Project */
 .featured-model-wrapper {
     width: 100%;
-    height: 450px; /* Pastikan tinggi tetap */
     background-color: #222;
     border-radius: 6px;
-    overflow: hidden;
     margin-top: 15px;
     margin-bottom: 25px;
-    padding: 0; /* Hapus padding jika iframe mengisi penuh */
+    padding: 0;
+    overflow: hidden;
 }
-
-.featured-model-wrapper iframe {
+.featured-model-wrapper .sketchfab-embed-wrapper {
+    width: 100%;
+    height: 450px;
+}
+.featured-model-wrapper .sketchfab-embed-wrapper iframe {
     width: 100%;
     height: 100%;
     border: none;
 }
 
+/* --- PERUBAHAN DIMULAI DI SINI UNTUK GALERI VIDEO --- */
 
 /* Styling untuk Galeri (Umum) */
 .gallery {
     margin-top: 20px;
-    /* Padding kiri-kanan gallery akan mengikuti padding .tab-pane */
 }
 
-/* Styling khusus untuk .gallery-item di dalam #animation dan #editing (untuk video vertikal) */
+/* Styling khusus untuk .gallery-item di dalam #animation dan #editing */
 #animation .gallery .gallery-item,
 #editing .gallery .gallery-item {
-    background-color: transparent;
-    padding: 0;
-    margin-bottom: 30px; /* Jarak antar video item */
-    display: block; /* Agar .video-wrapper di dalamnya bisa di-center dengan margin auto */
+    background-color: transparent; /* Hapus background item jika video sudah punya background sendiri */
+    padding: 0; /* Hapus padding item */
+    margin-bottom: 30px; /* Beri jarak antar video yang ditumpuk */
+    display: block; /* Pastikan item mengambil lebar penuh */
 }
 
-/* Tidak perlu aturan khusus untuk .video-wrapper di #animation dan #editing jika .video-wrapper global sudah sesuai */
-
-
-/* Styling khusus untuk video "Die with Smile" (rasio 9:16) */
-/* Anda perlu menambahkan ID atau kelas khusus ke .video-wrapper untuk video ini di HTML */
-/* Contoh jika Anda menambahkan id="video-die-with-smile" pada div.video-wrapper di HTML: */
-#video-die-with-smile { /* Ganti dengan ID atau kelas yang Anda gunakan di HTML */
-    max-width: 360px; /* Batasi lebar agar tingginya proporsional dan tidak terlalu besar. Sesuaikan! */
-    /* Atau bisa juga menggunakan max-height jika lebih prefer:
-    max-height: 640px;
-    */
+/* Styling untuk .video-wrapper di dalam .gallery-item pada #animation dan #editing */
+#animation .gallery .video-wrapper,
+#editing .gallery .video-wrapper {
+    width: 100%; /* Lebar penuh relatif terhadap parent (.tab-pane) */
+    max-width: 720px; /* Atur lebar maksimum video, sesuaikan jika perlu */
     margin-left: auto;
     margin-right: auto;
+    /* background-color, border-radius, margin-top, margin-bottom sudah diatur oleh .video-wrapper global */
 }
-
 
 /* Styling khusus untuk .gallery-item yang berisi Sketchfab (di tab #texturing) */
 #texturing .gallery {
-    display: grid;
+    display: grid; /* Kembalikan grid untuk galeri Sketchfab */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
-    /* Padding kiri-kanan gallery akan mengikuti padding .tab-pane */
 }
 
 #texturing .gallery .gallery-item {
-    background-color: #2a2a2a;
+    background-color: #2a2a2a; /* Latar belakang untuk setiap item galeri Sketchfab */
     border-radius: 8px;
-    padding: 15px; /* Padding internal untuk item Sketchfab */
+    padding: 15px;
     box-sizing: border-box;
-    display: flex;
+    display: flex; /* Tetap flex untuk konten di dalamnya */
     flex-direction: column;
     overflow: hidden;
-    margin-bottom: 0;
+    margin-bottom: 0; /* Reset margin-bottom jika ada dari aturan sebelumnya */
 }
 
+/* --- AKHIR PERUBAHAN UNTUK GALERI VIDEO --- */
+
+
+/* Styling khusus untuk Sketchfab embed di dalam .gallery-item (tab #texturing) */
 #texturing .gallery-item .sketchfab-embed-wrapper {
     width: 100%;
     height: 300px;
