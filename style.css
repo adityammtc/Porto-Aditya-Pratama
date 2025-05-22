@@ -7,13 +7,13 @@ body {
     background-color: #121212;
     color: #e0e0e0;
     font-size: 16px;
+    overflow-x: hidden; /* Mencegah scrollbar horizontal karena transform */
 }
 
 .portfolio-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px; /* Padding kiri kanan saja, atas bawah diatur oleh header/footer */
-    /* Tidak perlu display flex atau min-height 100vh di sini lagi */
+    padding: 0 20px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -40,11 +40,11 @@ a:hover {
 .site-header {
     position: sticky;
     top: 0;
-    z-index: 1000; /* Pastikan di atas konten lain */
-    background-color: #1a1a1a; /* Warna latar agar tidak transparan saat sticky */
-    padding: 20px 0; /* Padding atas bawah untuk header */
+    z-index: 1000;
+    background-color: #1a1a1a;
+    padding: 20px 0;
     border-bottom: 2px solid #333333;
-    text-align: center; /* Pusatkan H1 dan Navigasi */
+    text-align: center;
 }
 
 .site-header h1 {
@@ -93,25 +93,52 @@ a:hover {
 
 /* Area Konten Tab */
 .tab-content-area {
-    padding-top: 30px; /* Jarak dari header sticky */
-    padding-bottom: 30px; /* Jarak ke footer */
-    /* Tidak perlu position, overflow, atau flex di sini */
+    padding-top: 30px;
+    padding-bottom: 30px;
+    position: relative; /* Diperlukan jika kita ingin mengontrol overflow anak-anaknya, meski tidak `absolute` */
+    overflow: hidden;   /* PENTING: Mencegah konten yang di-transform keluar sementara terlihat */
 }
 
 .tab-pane {
-    display: none; /* Semua panel disembunyikan secara default */
-    padding: 20px; /* Padding di dalam panel konten */
+    display: none; /* Awalnya disembunyikan */
+    padding: 20px;
     background-color: #1e1e1e;
     border-radius: 8px;
-    margin-bottom: 20px; /* Jarak antar panel jika ada (meski hanya 1 yg tampil) */
-    opacity: 0; /* Untuk transisi fade */
-    transition: opacity 0.4s ease-in-out; /* Transisi untuk fade */
+    margin-bottom: 20px;
+
+    opacity: 0;
+    transform: translateX(100%); /* Defaultnya, semua panel siap masuk dari kanan */
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
 }
 
 .tab-pane.active {
-    display: block; /* Panel aktif ditampilkan */
-    opacity: 1; /* Panel aktif terlihat penuh */
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
 }
+
+/* Kelas untuk animasi keluar */
+.tab-pane.is-exiting-left {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.tab-pane.is-exiting-right {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+/* Kelas untuk persiapan masuk (jika diperlukan untuk override default) */
+.tab-pane.is-entering-from-left {
+    transform: translateX(-100%);
+    /* opacity akan di-handle saat menjadi .active */
+}
+
+.tab-pane.is-entering-from-right {
+    transform: translateX(100%);
+    /* opacity akan di-handle saat menjadi .active */
+}
+
 
 .tab-pane h2 {
     font-size: 2.2em;
@@ -121,7 +148,7 @@ a:hover {
     margin-top: 0;
 }
 
-/* Styling untuk konten di dalam tab (placeholder, video, model, dll) */
+/* Styling untuk konten di dalam tab (placeholder, video, model, dll) - Sama */
 .placeholder-content,
 .video-wrapper,
 .model-container,
@@ -149,7 +176,6 @@ a:hover {
     color: #f0f0f0;
 }
 
-/* Galeri untuk video dan model */
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -173,10 +199,10 @@ video {
 /* Footer */
 .site-footer {
     text-align: center;
-    padding: 25px 0; /* Padding atas bawah untuk footer */
+    padding: 25px 0;
     background-color: #1f1f1f;
     color: #aaaaaa;
     border-top: 2px solid #333333;
     font-size: 0.9em;
-    margin-top: 20px; /* Jarak dari konten terakhir */
+    margin-top: 20px;
 }
