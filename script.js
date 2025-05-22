@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         currentActiveIndex = tabButtons.indexOf(initiallyActiveButton);
     } else if (tabButtons.length > 0) {
         currentActiveIndex = 0; // Default ke tab pertama jika tidak ada yang aktif di HTML
-        tabButtons[0].classList.add('active');
+        if(tabButtons[0]) tabButtons[0].classList.add('active'); // Periksa apakah tabButtons[0] ada
     }
 
     // Inisialisasi posisi dan status panel
@@ -36,35 +36,43 @@ document.addEventListener('DOMContentLoaded', function() {
         const targetButton = tabButtons[targetIndex];
 
         // Nonaktifkan tombol dan panel saat ini
-        currentButton.classList.remove('active');
-        currentPane.classList.remove('active'); // Ini akan memicu visibility: hidden dll.
+        if(currentButton) currentButton.classList.remove('active');
+        if(currentPane) {
+            currentPane.classList.remove('active'); // Ini akan memicu visibility: hidden dll.
+        }
+
 
         // Segera aktifkan tombol target
-        targetButton.classList.add('active');
+        if(targetButton) targetButton.classList.add('active');
 
         // Tentukan arah slide dan siapkan panel target di luar layar
         if (targetIndex > currentActiveIndex) { // Panel baru datang dari kanan
-            currentPane.style.left = '-100%'; // Panel saat ini keluar ke kiri
-            currentPane.style.opacity = '0';
-
-            targetPane.style.left = '100%';   // Panel target mulai dari kanan
-            targetPane.style.opacity = '0';
+            if(currentPane) {
+                currentPane.style.left = '-100%';
+                currentPane.style.opacity = '0';
+            }
+            if(targetPane) {
+                targetPane.style.left = '100%';
+                targetPane.style.opacity = '0';
+            }
         } else { // Panel baru datang dari kiri
-            currentPane.style.left = '100%';  // Panel saat ini keluar ke kanan
-            currentPane.style.opacity = '0';
-
-            targetPane.style.left = '-100%';  // Panel target mulai dari kiri
-            targetPane.style.opacity = '0';
+            if(currentPane) {
+                currentPane.style.left = '100%';
+                currentPane.style.opacity = '0';
+            }
+            if(targetPane) {
+                targetPane.style.left = '-100%';
+                targetPane.style.opacity = '0';
+            }
         }
 
         // Beri sedikit waktu browser untuk memproses posisi awal sebelum transisi
         requestAnimationFrame(() => {
-            // Sekarang set kelas 'active' pada panel target dan geser ke posisi akhir
-            // Ini penting agar styling seperti max-height dari kelas .active diterapkan
-            // bersamaan dengan dimulainya transisi masuk.
-            targetPane.classList.add('active');
-            targetPane.style.left = '0';
-            targetPane.style.opacity = '1';
+            if(targetPane) {
+                targetPane.classList.add('active');
+                targetPane.style.left = '0';
+                targetPane.style.opacity = '1';
+            }
         });
 
         currentActiveIndex = targetIndex;
@@ -76,5 +84,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    console.log("Sistem tab portofolio dengan slide kiri-kanan dan scroll internal siap!");
+    // Jalankan inisialisasi untuk tab pertama jika ada
+    if (currentActiveIndex !== -1 && tabPanes[currentActiveIndex]) {
+        // Tidak perlu memanggil showTab, karena inisialisasi di atas sudah menangani tampilan awal
+        // Cukup pastikan tab aktif pertama terlihat
+        tabPanes[currentActiveIndex].style.left = '0';
+        tabPanes[currentActiveIndex].style.opacity = '1';
+        tabPanes[currentActiveIndex].classList.add('active');
+    }
+
+
+    console.log("Sistem tab portofolio dengan slide kiri-kanan dan scroll internal (v2) siap!");
 });
