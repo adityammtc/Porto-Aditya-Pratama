@@ -136,7 +136,7 @@ a:hover {
     box-sizing: border-box;
     color: #888;
     padding: 0;
-    position: relative; /* Tetap relative jika ada elemen lain yang perlu absolute di masa depan */
+    position: relative;
 }
 
 /* Untuk placeholder yang masih berupa teks */
