@@ -61,6 +61,7 @@ a:hover {
     display: flex;
     justify-content: center;
     gap: 10px;
+    flex-wrap: wrap; /* Tambahkan ini agar tombol bisa wrap jika layar kecil */
 }
 
 .tab-navigation .tab-button {
@@ -74,6 +75,7 @@ a:hover {
     border-radius: 6px;
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
     outline: none;
+    margin-bottom: 5px; /* Tambahkan margin bawah untuk tombol yang wrap */
 }
 
 .tab-navigation .tab-button:hover {
@@ -125,13 +127,16 @@ a:hover {
     color: #f0f0f0;
 }
 
-/* Styling untuk Video Wrapper */
+/* Styling untuk Video Wrapper (Umum dan Featured Project) */
 .video-wrapper {
-    width: 100%;
+    width: 100%; /* Untuk video di featured project agar full width */
+    max-width: 800px; /* Batasi lebar maksimum video agar tidak terlalu besar di layar lebar */
+    margin-left: auto; /* Pusatkan video jika max-width tercapai */
+    margin-right: auto; /* Pusatkan video jika max-width tercapai */
     background-color: #2a2a2a;
     border-radius: 6px;
     margin-top: 15px;
-    margin-bottom: 15px; /* Kurangi sedikit margin bottom jika ada caption */
+    margin-bottom: 15px;
     overflow: hidden;
     position: relative;
 }
@@ -140,11 +145,11 @@ a:hover {
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto;
-    border-radius: 4px; /* Bisa juga 0 jika wrapper sudah rounded */
+    margin: 0 auto; /* Pastikan video di tengah wrapper */
+    border-radius: 4px;
 }
 
-.video-caption { /* Style untuk caption di bawah video di galeri */
+.video-caption {
     font-size: 0.9em;
     color: #ccc;
     text-align: center;
@@ -153,7 +158,7 @@ a:hover {
 }
 
 
-/* Styling untuk Image Wrapper (UV Map) */
+/* Styling untuk Image Wrapper (UV Map) - Dihapus dari penggunaan, tapi biarkan jika diperlukan nanti */
 .image-wrapper {
     width: 100%;
     background-color: #2a2a2a;
@@ -171,7 +176,7 @@ a:hover {
     display: inline-block;
     border-radius: 4px;
 }
-.image-wrapper p { /* Untuk teks placeholder jika tidak ada gambar */
+.image-wrapper p {
     color: #888;
     margin: 0;
 }
@@ -180,17 +185,16 @@ a:hover {
 /* Styling untuk Model Sketchfab di Featured Project */
 .featured-model-wrapper {
     width: 100%;
-    background-color: #222; /* Warna latar belakang default */
+    background-color: #222;
     border-radius: 6px;
     margin-top: 15px;
     margin-bottom: 25px;
-    padding: 0; /* Hapus padding jika iframe mengisi penuh */
-    overflow: hidden; /* Untuk memastikan border-radius diterapkan */
+    padding: 0;
+    overflow: hidden;
 }
-/* Jika hanya menggunakan iframe, style di HTML sudah cukup. Jika menggunakan div.sketchfab-embed-wrapper di dalamnya: */
 .featured-model-wrapper .sketchfab-embed-wrapper {
     width: 100%;
-    height: 450px; /* Sesuaikan tinggi untuk model unggulan */
+    height: 450px;
 }
 .featured-model-wrapper .sketchfab-embed-wrapper iframe {
     width: 100%;
@@ -198,59 +202,88 @@ a:hover {
     border: none;
 }
 
-/* Styling untuk Galeri */
+/* --- PERUBAHAN DIMULAI DI SINI UNTUK GALERI VIDEO --- */
+
+/* Styling untuk Galeri (Umum) */
 .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
     margin-top: 20px;
 }
 
-.gallery-item {
-    background-color: #2a2a2a; /* Latar belakang untuk setiap item galeri */
+/* Styling khusus untuk .gallery-item di dalam #animation dan #editing */
+#animation .gallery .gallery-item,
+#editing .gallery .gallery-item {
+    background-color: transparent; /* Hapus background item jika video sudah punya background sendiri */
+    padding: 0; /* Hapus padding item */
+    margin-bottom: 30px; /* Beri jarak antar video yang ditumpuk */
+    display: block; /* Pastikan item mengambil lebar penuh */
+}
+
+/* Styling untuk .video-wrapper di dalam .gallery-item pada #animation dan #editing */
+#animation .gallery .video-wrapper,
+#editing .gallery .video-wrapper {
+    width: 100%; /* Lebar penuh relatif terhadap parent (.tab-pane) */
+    max-width: 720px; /* Atur lebar maksimum video, sesuaikan jika perlu */
+    margin-left: auto;
+    margin-right: auto;
+    /* background-color, border-radius, margin-top, margin-bottom sudah diatur oleh .video-wrapper global */
+}
+
+/* Styling khusus untuk .gallery-item yang berisi Sketchfab (di tab #texturing) */
+#texturing .gallery {
+    display: grid; /* Kembalikan grid untuk galeri Sketchfab */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+#texturing .gallery .gallery-item {
+    background-color: #2a2a2a; /* Latar belakang untuk setiap item galeri Sketchfab */
     border-radius: 8px;
     padding: 15px;
     box-sizing: border-box;
-    display: flex;
+    display: flex; /* Tetap flex untuk konten di dalamnya */
     flex-direction: column;
-    overflow: hidden; /* Untuk border radius pada konten di dalamnya */
+    overflow: hidden;
+    margin-bottom: 0; /* Reset margin-bottom jika ada dari aturan sebelumnya */
 }
 
-/* Styling khusus untuk Sketchfab embed di dalam .gallery-item */
-.gallery-item .sketchfab-embed-wrapper {
+/* --- AKHIR PERUBAHAN UNTUK GALERI VIDEO --- */
+
+
+/* Styling khusus untuk Sketchfab embed di dalam .gallery-item (tab #texturing) */
+#texturing .gallery-item .sketchfab-embed-wrapper {
     width: 100%;
-    height: 300px; /* Tinggi default untuk model di galeri */
+    height: 300px;
     position: relative;
-    margin-bottom: 10px; /* Jarak antara model dan teks atribusi */
-    background-color: #222; /* Warna background viewer sketchfab */
-    border-radius: 6px; /* Sudut melengkung untuk viewer */
-    overflow: hidden; /* Pastikan iframe tidak keluar dari border-radius */
+    margin-bottom: 10px;
+    background-color: #222;
+    border-radius: 6px;
+    overflow: hidden;
 }
 
-.gallery-item .sketchfab-embed-wrapper iframe {
+#texturing .gallery-item .sketchfab-embed-wrapper iframe {
     display: block;
     width: 100%;
     height: 100%;
-    border: none; /* Hapus border default iframe */
+    border: none;
 }
 
 /* Styling untuk teks atribusi dari Sketchfab agar sesuai tema gelap */
-.gallery-item .sketchfab-embed-wrapper p {
+#texturing .gallery-item .sketchfab-embed-wrapper p {
     font-size: 12px !important;
     font-weight: normal !important;
-    margin: 8px 5px 0px 5px !important; /* Atur margin atas, samping, bawah */
-    color: #b0b0b0 !important; /* Warna teks lebih terang untuk tema gelap */
+    margin: 8px 5px 0px 5px !important;
+    color: #b0b0b0 !important;
     text-align: center;
     line-height: 1.4;
 }
 
-.gallery-item .sketchfab-embed-wrapper p a {
+#texturing .gallery-item .sketchfab-embed-wrapper p a {
     font-weight: bold !important;
-    color: #bb86fc !important; /* Warna link sesuai tema */
+    color: #bb86fc !important;
 }
 
-.gallery-item .sketchfab-embed-wrapper p a:hover {
-    color: #ffffff !important; /* Warna link saat hover */
+#texturing .gallery-item .sketchfab-embed-wrapper p a:hover {
+    color: #ffffff !important;
     text-decoration: underline !important;
 }
 
