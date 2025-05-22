@@ -129,11 +129,10 @@ a:hover {
 
 /* Styling untuk Video Wrapper (Umum dan Featured Project) */
 .video-wrapper {
-    width: 100%; /* Video akan mengambil lebar penuh dari parentnya */
-    /* max-width: 800px; <-- DIHAPUS agar tidak membatasi lebar video */
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
-    background-color: #2a2a2a; /* Kamu bisa set ke transparent jika tidak ingin ada background pada wrapper */
+    background-color: #2a2a2a;
     border-radius: 6px;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -143,11 +142,11 @@ a:hover {
 
 .video-wrapper video {
     max-width: 100%;
-    width: 100%; /* Pastikan video mengisi wrapper */
+    width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
-    border-radius: 4px; /* Sesuaikan jika background wrapper transparent */
+    border-radius: 4px;
 }
 
 .video-caption {
@@ -186,7 +185,7 @@ a:hover {
 /* Styling untuk Model Sketchfab di Featured Project */
 .featured-model-wrapper {
     width: 100%;
-    background-color: #222; /* Atau bisa disamakan dengan background video jika ingin konsisten */
+    background-color: #222;
     border-radius: 6px;
     margin-top: 15px;
     margin-bottom: 25px;
@@ -195,7 +194,7 @@ a:hover {
 }
 .featured-model-wrapper .sketchfab-embed-wrapper {
     width: 100%;
-    height: 450px; /* Sesuaikan tinggi jika perlu agar proporsi baik */
+    height: 450px;
 }
 .featured-model-wrapper .sketchfab-embed-wrapper iframe {
     width: 100%;
@@ -222,11 +221,9 @@ a:hover {
 /* Styling untuk .video-wrapper di dalam .gallery-item pada #animation dan #editing */
 #animation .gallery .video-wrapper,
 #editing .gallery .video-wrapper {
-    width: 100%; /* Lebar penuh relatif terhadap parent (.gallery-item) */
-    /* max-width: 720px; <-- DIHAPUS agar tidak membatasi lebar video */
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
-    /* background-color, border-radius, margin-top, margin-bottom diambil dari .video-wrapper global */
 }
 
 /* Styling khusus untuk .gallery-item yang berisi Sketchfab (di tab #texturing) */
@@ -288,6 +285,12 @@ a:hover {
     text-decoration: underline !important;
 }
 
+/* Styling khusus untuk video vertikal "Die With Smile" */
+#video-die-with-smile {
+    max-width: 360px; /* Kamu bisa sesuaikan angka ini. Coba antara 320px - 450px */
+    margin-left: auto;
+    margin-right: auto;
+}
 
 /* Footer */
 .site-footer {
