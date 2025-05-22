@@ -1,38 +1,32 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const tabButtons = Array.from(document.querySelectorAll('.tab-button'));
     const tabPanes = Array.from(document.querySelectorAll('.tab-pane'));
-    const tabContentArea = document.querySelector('.tab-content-area'); // Ambil container tab
 
     let currentActiveButton = tabButtons.find(button => button.classList.contains('active'));
     let currentActivePane = tabPanes.find(pane => pane.classList.contains('active'));
-    let isTransitioning = false; // Flag untuk mencegah klik ganda saat transisi
+    let isTransitioning = false;
 
-    // Inisialisasi:
+    // Inisialisasi awal panel
+    // Panel yang aktif di HTML akan memiliki style dari CSS .active
+    // Panel lain kita sembunyikan dan siapkan
     tabPanes.forEach(pane => {
         if (pane !== currentActivePane) {
-            pane.style.opacity = '0'; // Mulai transparan
-            pane.style.transform = 'translateX(100%)'; // Mulai dari sisi kanan
-            pane.style.position = 'absolute'; // Semua panel non-aktif diposisikan absolut
-            pane.style.top = '0';
-            pane.style.left = '0';
-            pane.style.display = 'none'; // Awalnya sembunyikan
-            pane.classList.remove('active', 'is-exiting-left', 'is-exiting-right');
+            pane.style.display = 'none';
+            pane.style.opacity = '0';
+            // Kita tidak set transform awal di sini, akan diatur saat showTab
         } else {
-            // Panel aktif awal
-            pane.style.display = 'block';
-            pane.style.position = 'relative'; // Panel aktif adalah relatif
-            pane.style.opacity = '1';
-            pane.style.transform = 'translateX(0)';
-            pane.classList.add('active');
+            // Untuk panel aktif awal, pastikan properti dasar ada
+            // CSS .active sudah mengatur display, opacity, transform, position
         }
     });
 
     function showTab(targetTabId) {
-        if (isTransitioning) return; // Jika sedang transisi, abaikan klik
+        if (isTransitioning) return; // Abaikan klik jika sedang transisi
 
         const targetButton = tabButtons.find(button => button.dataset.tab === targetTabId);
         const targetPane = document.getElementById(targetTabId);
 
+        // Jika target tidak valid atau sama dengan yang aktif, jangan lakukan apa-apa
         if (!targetPane || targetPane === currentActivePane || !targetButton) {
             return;
         }
@@ -41,68 +35,74 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const currentIndex = tabButtons.indexOf(currentActiveButton);
         const targetIndex = tabButtons.indexOf(targetButton);
+        const slideToLeft = targetIndex > currentIndex; // True jika target ada di kanan (panel lama geser ke kiri)
 
-        // 1. Animasikan keluar panel saat ini (currentActivePane)
+        // 1. Animasikan KELUAR panel saat ini (currentActivePane)
         if (currentActivePane) {
-            const paneToExit = currentActivePane; // Simpan referensi
-            paneToExit.classList.remove('active');
-            paneToExit.style.zIndex = '0';
-            // Penting: panel yang keluar harus absolute agar tidak menggeser
-            paneToExit.style.position = 'absolute';
+            const paneToExit = currentActivePane;
+            
+            // Siapkan panel yang keluar untuk animasi
+            paneToExit.style.position = 'absolute'; // Agar tidak mengganggu flow dan bisa ditumpuk
+            paneToExit.style.top = '0';
+            paneToExit.style.left = '0';
+            paneToExit.style.width = '100%'; // Pastikan lebarnya tetap
+            paneToExit.style.zIndex = '0';    // Di bawah panel yang akan masuk
 
+            paneToExit.classList.remove('active'); // Hapus kelas active
 
-            if (targetIndex > currentIndex) {
-                paneToExit.classList.add('is-exiting-left'); // Keluar ke kiri
+            // Memicu animasi keluar dengan kelas CSS
+            if (slideToLeft) {
+                paneToExit.classList.add('is-exiting-left'); // CSS: transform: translateX(-100%); opacity: 0;
             } else {
-                paneToExit.classList.add('is-exiting-right'); // Keluar ke kanan
+                paneToExit.classList.add('is-exiting-right'); // CSS: transform: translateX(100%); opacity: 0;
             }
-
-            // Dengarkan transitionend di panel yang KELUAR
+            
+            // Setelah transisi keluar selesai
             paneToExit.addEventListener('transitionend', function handleExitTransition(event) {
-                // Pastikan event berasal dari properti transform atau opacity
+                // Pastikan event dari properti yang benar untuk menghindari trigger ganda
                 if (event.propertyName !== 'transform' && event.propertyName !== 'opacity') {
                     return;
                 }
-                this.style.display = 'none';
+                this.style.display = 'none'; // Sembunyikan sepenuhnya
                 this.classList.remove('is-exiting-left', 'is-exiting-right');
-                // Reset ke posisi siap masuk (default kanan)
-                this.style.transform = 'translateX(100%)';
-                this.style.opacity = '0';
-                // this.style.position = 'absolute'; // sudah absolute
-                this.removeEventListener('transitionend', handleExitTransition); // Hapus listener
+                // Reset transform dan opacity jika perlu untuk penggunaan berikutnya (opsional, CSS sudah menangani)
+                // this.style.transform = ''; 
+                // this.style.opacity = '';
+                this.removeEventListener('transitionend', handleExitTransition);
             });
         }
 
-        // 2. Siapkan panel target (targetPane) untuk masuk
-        targetPane.classList.remove('is-exiting-left', 'is-exiting-right');
-        targetPane.style.position = 'absolute'; // Sementara absolute selama persiapan
+        // 2. Siapkan panel TARGET (targetPane) untuk MASUK
+        targetPane.style.display = 'block';    // Tampilkan agar bisa dianimasikan
+        targetPane.style.position = 'absolute'; // Juga absolute selama persiapan dan transisi masuk
         targetPane.style.top = '0';
         targetPane.style.left = '0';
-        targetPane.style.display = 'block'; // Tampilkan SEKARANG agar transform awal bisa diterapkan
-        targetPane.style.zIndex = '1';    // Di atas panel yang keluar
+        targetPane.style.width = '100%';
+        targetPane.style.zIndex = '1';       // Di atas panel yang keluar
+        targetPane.classList.remove('is-exiting-left', 'is-exiting-right'); // Hapus sisa kelas keluar jika ada
 
-        // Tentukan posisi awal masuk sebelum animasi
-        if (targetIndex > currentIndex) { // Target masuk dari kanan
+        // Atur posisi awal sebelum animasi masuk (dari arah yang berlawanan dengan keluarnya panel lama)
+        if (slideToLeft) { // Target masuk dari kanan
             targetPane.style.transform = 'translateX(100%)';
         } else { // Target masuk dari kiri
             targetPane.style.transform = 'translateX(-100%)';
         }
-        targetPane.style.opacity = '0'; // Pastikan transparan
+        targetPane.style.opacity = '0'; // Mulai transparan
 
-        // 3. Animasikan masuk panel target
+        // 3. Animasikan MASUK panel target
         // Beri sedikit waktu (satu frame) agar browser mencatat perubahan display dan transform awal
         requestAnimationFrame(() => {
-            // Paksa reflow/repaint (opsional, tapi kadang membantu)
-            // void targetPane.offsetWidth;
+            // void targetPane.offsetWidth; // Paksa reflow/repaint jika perlu (kadang membantu)
 
             targetPane.classList.add('active'); // Ini akan memicu transisi CSS ke translateX(0) dan opacity:1
-            targetPane.style.position = 'relative'; // Setelah mulai animasi, jadikan relatif
+                                                // CSS .active juga akan mengatur position: relative;
 
-            // Dengarkan transitionend di panel yang MASUK untuk menandai akhir transisi keseluruhan
             targetPane.addEventListener('transitionend', function handleEnterTransition(event) {
                 if (event.propertyName !== 'transform' && event.propertyName !== 'opacity') {
                     return;
                 }
+                // Setelah animasi masuk selesai, pastikan position: relative; (sudah diatur oleh .tab-pane.active di CSS)
+                // this.style.position = 'relative'; // Seharusnya tidak perlu jika CSS sudah benar
                 isTransitioning = false; // Transisi selesai
                 this.removeEventListener('transitionend', handleEnterTransition);
             }, { once: true }); // { once: true } akan menghapus listener setelah sekali jalan
@@ -120,8 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     tabButtons.forEach(button => {
         button.addEventListener('click', function() {
-            const targetTabId = this.dataset.tab;
-            showTab(targetTabId);
+            showTab(this.dataset.tab);
         });
     });
 
