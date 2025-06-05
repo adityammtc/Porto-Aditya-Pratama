@@ -9,7 +9,7 @@
 <body>
     <div class="portfolio-container">
         <header class="site-header">
-            <h1>Portofolio Aditya Pratama Widya Putra</h1>
+            <h1>Aditya Pratama W.P</h1>
             <nav class="tab-navigation">
                 <ul>
                     <li><button class="tab-button active" data-tab="featured">Featured Project</button></li>
@@ -22,7 +22,7 @@
         </header>
 
         <main class="tab-content-area">
-            <!-- Panel Konten untuk Tab "Featured Project" - TIDAK BERUBAH -->
+            <!-- Panel Konten untuk Tab "Featured Project" -->
             <section id="featured" class="tab-pane active">
                 <h2>Featured Project Showcase</h2>
                 <p>Berikut adalah sorotan dari kemampuan saya dalam animasi 3D dan texturing, yang merupakan bagian integral dari proyek pengembangan game balap sebagai tugas kuliah di STMM MMTC Yogyakarta.</p>
@@ -45,168 +45,194 @@
                 </article>
             </section>
 
-            <!-- Panel Konten untuk Tab "3D Animation" - DIUBAH MENJADI SLIDER -->
+            <!-- Panel Konten untuk Tab "3D Animation" - REVISI DENGAN SLIDER -->
             <section id="animation" class="tab-pane">
                 <h2>Koleksi Animasi 3D</h2>
-                <p>Berikut adalah beberapa video animasi 3D lain yang telah saya kerjakan.</p>
-                <div class="video-slider-container">
-                    <div class="video-slider" data-slider-id="animation-slider">
-                        <div class="gallery-item"> <!-- Slide 1 -->
+                <p>Geser untuk melihat karya animasi 3D lainnya.</p>
+                <div class="video-slider-container" id="animation-slider-container">
+                    <div class="video-slider-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="video-slide-item">
                             <div class="video-wrapper">
-                                <video controls loop preload="metadata" playsinline>
+                                <video preload="metadata" playsinline controls>
+                                    <source src="assets/Animasi Pocong.mp4" type="video/mp4">
+                                    Browser Anda tidak mendukung tag video.
+                                </video>
+                                <p class="video-caption">Animasi Pocong Balap (Game)</p>
+                            </div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="video-slide-item">
+                            <div class="video-wrapper">
+                                <video preload="metadata" playsinline controls>
                                     <source src="assets/repo gd_1.mp4" type="video/mp4">
                                     Browser Anda tidak mendukung tag video.
                                 </video>
+                                <p class="video-caption">R.E.P.O. Geometry Dash</p>
                             </div>
-                            <p class="video-caption">R.E.P.O. Geometry Dash</p>
                         </div>
-                        <div class="gallery-item" id="video-sonetto-slide"> <!-- Slide 2 - Video Vertikal -->
-                            <div class="video-wrapper vertical-video-wrapper">
-                               <video controls loop preload="metadata" playsinline>
+                        <!-- Slide 3 -->
+                        <div class="video-slide-item">
+                            <div class="video-wrapper">
+                                <video preload="metadata" playsinline controls>
                                    <source src="assets/sonetto short animation.mp4" type="video/mp4">
                                    Browser Anda tidak mendukung tag video.
                                </video>
-                            </div>
-                           <p class="video-caption">Sonetto Short Animation</p>
-                       </div>
-                        <div class="gallery-item"> <!-- Slide 3 -->
+                               <p class="video-caption">Sonetto Short Animation</p>
+                           </div>
+                        </div>
+                        <!-- Slide 4 -->
+                        <div class="video-slide-item">
                             <div class="video-wrapper">
-                                 <video controls loop preload="metadata" playsinline>
+                                 <video preload="metadata" playsinline controls>
                                     <source src="assets/onepoundfish.mp4" type="video/mp4">
                                     Browser Anda tidak mendukung tag video.
                                 </video>
+                                <p class="video-caption">One Pound Fish</p>
                             </div>
-                            <p class="video-caption">One Pound Fish</p>
                         </div>
-                        <div class="gallery-item" id="video-die-with-smile-slide"> <!-- Slide 4 - Video Vertikal -->
-                            <div class="video-wrapper vertical-video-wrapper">
-                                <video controls loop preload="metadata" playsinline>
+                        <!-- Slide 5: Video Vertikal -->
+                        <div class="video-slide-item" data-is-vertical="true">
+                            <div class="video-wrapper vertical-video-wrapper" id="video-die-with-smile-wrapper">
+                                <video preload="metadata" playsinline controls>
                                    <source src="assets/die with smile 2_1_1.mp4" type="video/mp4">
                                    Browser Anda tidak mendukung tag video.
                                </video>
-                            </div>
-                           <p class="video-caption">Die With Smile</p>
+                               <p class="video-caption">Die With Smile</p>
+                           </div>
                        </div>
-                       <div class="gallery-item"> <!-- Slide 5 -->
+                       <!-- Slide 6 -->
+                       <div class="video-slide-item">
                             <div class="video-wrapper">
-                                <video controls loop preload="metadata" playsinline>
+                                <video preload="metadata" playsinline controls>
                                    <source src="assets/zembu_1.mp4" type="video/mp4">
                                    Browser Anda tidak mendukung tag video.
                                </video>
-                            </div>
-                           <p class="video-caption">Roblox Anime Opening</p>
+                               <p class="video-caption">Roblox Anime Opening</p>
+                           </div>
                        </div>
-                       <div class="gallery-item"> <!-- Slide 6 -->
+                       <!-- Slide 7 -->
+                       <div class="video-slide-item">
                             <div class="video-wrapper">
-                                <video controls loop preload="metadata" playsinline>
+                                <video preload="metadata" playsinline controls>
                                    <source src="assets/Fight.mp4" type="video/mp4">
                                    Browser Anda tidak mendukung tag video.
                                </video>
-                            </div>
-                           <p class="video-caption">Fight</p>
+                               <p class="video-caption">Fight</p>
+                           </div>
                        </div>
                     </div>
-                    <button class="slider-button prev" data-controls="animation-slider" aria-label="Previous Slide">❮</button>
-                    <button class="slider-button next" data-controls="animation-slider" aria-label="Next Slide">❯</button>
+                    <button class="slider-nav prev" data-direction="-1">❮</button>
+                    <button class="slider-nav next" data-direction="1">❯</button>
+                    <div class="slider-dots">
+                        <!-- Dots akan di-generate oleh JavaScript -->
+                    </div>
                 </div>
             </section>
 
-            <!-- Panel Konten untuk Tab "Texturing" (via Sketchfab) - TIDAK BERUBAH -->
+            <!-- Panel Konten untuk Tab "Texturing" (via Sketchfab) -->
             <section id="texturing" class="tab-pane">
                 <h2>Galeri Texturing (via Sketchfab)</h2>
                 <p>Kumpulan karya texturing saya pada Tugas Kuliah Game Balap.</p>
                 <div class="gallery">
                     <!-- ITEM MODEL 1: Pocong Balap -->
                     <div class="gallery-item" id="model-pocong-balap">
-                        <div class="sketchfab-embed-wrapper"> <iframe title="Pocong Balap Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/b5fd73a04f964c2992a8a40e2dc973e7/embed"> </iframe> <p> <a href="https://sketchfab.com/3d-models/pocong-balap-indonesian-ghost-b5fd73a04f964c2992a8a40e2dc973e7?utm_medium=embed&utm_campaign=share-popup&utm_content=b5fd73a04f964c2992a8a40e2dc973e7" target="_blank" rel="nofollow"> Pocong Balap Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=b5fd73a04f964c2992a8a40e2dc973e7" target="_blank" rel="nofollow"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=b5fd73a04f964c2992a8a40e2dc973e7" target="_blank" rel="nofollow">Sketchfab</a></p></div>
+                        <div class="sketchfab-embed-wrapper"> <iframe title="Pocong Balap Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/b5fd73a04f964c2992a8a40e2dc973e7/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/pocong-balap-indonesian-ghost-b5fd73a04f964c2992a8a40e2dc973e7?utm_medium=embed&utm_campaign=share-popup&utm_content=b5fd73a04f964c2992a8a40e2dc973e7" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Pocong Balap Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=b5fd73a04f964c2992a8a40e2dc973e7" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=b5fd73a04f964c2992a8a40e2dc973e7" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
                     </div>
-                    {/* ... Item Sketchfab lainnya tetap sama ... */}
                     <div class="gallery-item" id="model-kunti-balap">
-                        <div class="sketchfab-embed-wrapper"> <iframe title="Kunti Balap Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/8d628c95af554d248a92087e9ee125f7/embed"> </iframe> <p> <a href="https://sketchfab.com/3d-models/kunti-balap-indonesian-ghost-8d628c95af554d248a92087e9ee125f7?utm_medium=embed&utm_campaign=share-popup&utm_content=8d628c95af554d248a92087e9ee125f7" target="_blank" rel="nofollow"> Kunti Balap Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=8d628c95af554d248a92087e9ee125f7" target="_blank" rel="nofollow"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=8d628c95af554d248a92087e9ee125f7" target="_blank" rel="nofollow">Sketchfab</a></p></div>
+                        <div class="sketchfab-embed-wrapper"> <iframe title="Kunti Balap Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/8d628c95af554d248a92087e9ee125f7/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/kunti-balap-indonesian-ghost-8d628c95af554d248a92087e9ee125f7?utm_medium=embed&utm_campaign=share-popup&utm_content=8d628c95af554d248a92087e9ee125f7" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Kunti Balap Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=8d628c95af554d248a92087e9ee125f7" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=8d628c95af554d248a92087e9ee125f7" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
                     </div>
                     <div class="gallery-item" id="model-banaspati-balap">
-                        <div class="sketchfab-embed-wrapper"> <iframe title="Banaspati Balap Indoensian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/4353b90e107b4ca49d18aa5017e79485/embed"> </iframe> <p> <a href="https://sketchfab.com/3d-models/banaspati-balap-indoensian-ghost-4353b90e107b4ca49d18aa5017e79485?utm_medium=embed&utm_campaign=share-popup&utm_content=4353b90e107b4ca49d18aa5017e79485" target="_blank" rel="nofollow"> Banaspati Balap Indoensian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=4353b90e107b4ca49d18aa5017e79485" target="_blank" rel="nofollow"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=4353b90e107b4ca49d18aa5017e79485" target="_blank" rel="nofollow">Sketchfab</a></p></div>
+                        <div class="sketchfab-embed-wrapper"> <iframe title="Banaspati Balap Indoensian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/4353b90e107b4ca49d18aa5017e79485/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/banaspati-balap-indoensian-ghost-4353b90e107b4ca49d18aa5017e79485?utm_medium=embed&utm_campaign=share-popup&utm_content=4353b90e107b4ca49d18aa5017e79485" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Banaspati Balap Indoensian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=4353b90e107b4ca49d18aa5017e79485" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=4353b90e107b4ca49d18aa5017e79485" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
                     </div>
                     <div class="gallery-item" id="model-buto-ijo-balap">
-                         <div class="sketchfab-embed-wrapper"> <iframe title="Buto Ijo Balap Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/df40f68b6c6b4ddba8a427767deaf468/embed"> </iframe> <p> <a href="https://sketchfab.com/3d-models/buto-ijo-balap-indonesian-ghost-df40f68b6c6b4ddba8a427767deaf468?utm_medium=embed&utm_campaign=share-popup&utm_content=df40f68b6c6b4ddba8a427767deaf468" target="_blank" rel="nofollow"> Buto Ijo Balap Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=df40f68b6c6b4ddba8a427767deaf468" target="_blank" rel="nofollow"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=df40f68b6c6b4ddba8a427767deaf468" target="_blank" rel="nofollow">Sketchfab</a></p></div>
+                         <div class="sketchfab-embed-wrapper"> <iframe title="Buto Ijo Balap Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/df40f68b6c6b4ddba8a427767deaf468/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/buto-ijo-balap-indonesian-ghost-df40f68b6c6b4ddba8a427767deaf468?utm_medium=embed&utm_campaign=share-popup&utm_content=df40f68b6c6b4ddba8a427767deaf468" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Buto Ijo Balap Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=df40f68b6c6b4ddba8a427767deaf468" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=df40f68b6c6b4ddba8a427767deaf468" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
                     </div>
                     <div class="gallery-item" id="model-kuyang-head">
-                        <div class="sketchfab-embed-wrapper"> <iframe title="Kuyang Head Mode Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/8dcb604d7bea49d2942932104f439267/embed"> </iframe> <p> <a href="https://sketchfab.com/3d-models/kuyang-head-mode-indonesian-ghost-8dcb604d7bea49d2942932104f439267?utm_medium=embed&utm_campaign=share-popup&utm_content=8dcb604d7bea49d2942932104f439267" target="_blank" rel="nofollow"> Kuyang Head Mode Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=8dcb604d7bea49d2942932104f439267" target="_blank" rel="nofollow"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=8dcb604d7bea49d2942932104f439267" target="_blank" rel="nofollow">Sketchfab</a></p></div>
+                        <div class="sketchfab-embed-wrapper"> <iframe title="Kuyang Head Mode Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/8dcb604d7bea49d2942932104f439267/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/kuyang-head-mode-indonesian-ghost-8dcb604d7bea49d2942932104f439267?utm_medium=embed&utm_campaign=share-popup&utm_content=8dcb604d7bea49d2942932104f439267" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Kuyang Head Mode Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=8dcb604d7bea49d2942932104f439267" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=8dcb604d7bea49d2942932104f439267" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
                     </div>
                     <div class="gallery-item" id="model-kuyang-human">
-                        <div class="sketchfab-embed-wrapper"> <iframe title="Kuyang Human Mode Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/ed8f3d33ce4e4264b76384e8f3e19725/embed"> </iframe> <p> <a href="https://sketchfab.com/3d-models/kuyang-human-mode-indonesian-ghost-ed8f3d33ce4e4264b76384e8f3e19725?utm_medium=embed&utm_campaign=share-popup&utm_content=ed8f3d33ce4e4264b76384e8f3e19725" target="_blank" rel="nofollow"> Kuyang Human Mode Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=ed8f3d33ce4e4264b76384e8f3e19725" target="_blank" rel="nofollow"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=ed8f3d33ce4e4264b76384e8f3e19725" target="_blank" rel="nofollow">Sketchfab</a></p></div>
+                        <div class="sketchfab-embed-wrapper"> <iframe title="Kuyang Human Mode Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/ed8f3d33ce4e4264b76384e8f3e19725/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/kuyang-human-mode-indonesian-ghost-ed8f3d33ce4e4264b76384e8f3e19725?utm_medium=embed&utm_campaign=share-popup&utm_content=ed8f3d33ce4e4264b76384e8f3e19725" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Kuyang Human Mode Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=ed8f3d33ce4e4264b76384e8f3e19725" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=ed8f3d33ce4e4264b76384e8f3e19725" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
                     </div>
                     <div class="gallery-item" id="model-genderuwo-balap">
-                        <div class="sketchfab-embed-wrapper"> <iframe title="Genderuwo Balap Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/4546113772a54068aa1af85d435a959f/embed"> </iframe> <p> <a href="https://sketchfab.com/3d-models/genderuwo-balap-indonesian-ghost-4546113772a54068aa1af85d435a959f?utm_medium=embed&utm_campaign=share-popup&utm_content=4546113772a54068aa1af85d435a959f" target="_blank" rel="nofollow"> Genderuwo Balap Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=4546113772a54068aa1af85d435a959f" target="_blank" rel="nofollow"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=4546113772a54068aa1af85d435a959f" target="_blank" rel="nofollow">Sketchfab</a></p></div>
+                        <div class="sketchfab-embed-wrapper"> <iframe title="Genderuwo Balap Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/4546113772a54068aa1af85d435a959f/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/genderuwo-balap-indonesian-ghost-4546113772a54068aa1af85d435a959f?utm_medium=embed&utm_campaign=share-popup&utm_content=4546113772a54068aa1af85d435a959f" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Genderuwo Balap Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=4546113772a54068aa1af85d435a959f" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=4546113772a54068aa1af85d435a959f" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
                     </div>
                     <div class="gallery-item" id="model-tuyul-balap">
-                        <div class="sketchfab-embed-wrapper"> <iframe title="Tuyul Balap Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/9617abf3b71e4bfe911bd84828d2c9f6/embed"> </iframe> <p> <a href="https://sketchfab.com/3d-models/tuyul-balap-indonesian-ghost-9617abf3b71e4bfe911bd84828d2c9f6?utm_medium=embed&utm_campaign=share-popup&utm_content=9617abf3b71e4bfe911bd84828d2c9f6" target="_blank" rel="nofollow"> Tuyul Balap Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=9617abf3b71e4bfe911bd84828d2c9f6" target="_blank" rel="nofollow"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=9617abf3b71e4bfe911bd84828d2c9f6" target="_blank" rel="nofollow">Sketchfab</a></p></div>
+                        <div class="sketchfab-embed-wrapper"> <iframe title="Tuyul Balap Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/9617abf3b71e4bfe911bd84828d2c9f6/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/tuyul-balap-indonesian-ghost-9617abf3b71e4bfe911bd84828d2c9f6?utm_medium=embed&utm_campaign=share-popup&utm_content=9617abf3b71e4bfe911bd84828d2c9f6" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Tuyul Balap Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=9617abf3b71e4bfe911bd84828d2c9f6" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=9617abf3b71e4bfe911bd84828d2c9f6" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
                     </div>
                     <div class="gallery-item" id="model-suster-ngesot-balap">
-                        <div class="sketchfab-embed-wrapper"> <iframe title="Suster Ngesot Balap Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/d03e5f473a534adc83907236466d828b/embed"> </iframe> <p> <a href="https://sketchfab.com/3d-models/suster-ngesot-balap-indonesian-ghost-d03e5f473a534adc83907236466d828b?utm_medium=embed&utm_campaign=share-popup&utm_content=d03e5f473a534adc83907236466d828b" target="_blank" rel="nofollow"> Suster Ngesot Balap Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=d03e5f473a534adc83907236466d828b" target="_blank" rel="nofollow"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=d03e5f473a534adc83907236466d828b" target="_blank" rel="nofollow">Sketchfab</a></p></div>
+                        <div class="sketchfab-embed-wrapper"> <iframe title="Suster Ngesot Balap Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/d03e5f473a534adc83907236466d828b/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/suster-ngesot-balap-indonesian-ghost-d03e5f473a534adc83907236466d828b?utm_medium=embed&utm_campaign=share-popup&utm_content=d03e5f473a534adc83907236466d828b" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Suster Ngesot Balap Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=d03e5f473a534adc83907236466d828b" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=d03e5f473a534adc83907236466d828b" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
                     </div>
                 </div>
                 <p style="margin-top: 20px;">Semua karater tersebut berdasarkan hantu dan mitos indonesia.</p>
             </section>
 
-            <!-- Panel Konten untuk Tab "Editing" - DIUBAH MENJADI SLIDER -->
+            <!-- Panel Konten untuk Tab "Editing" - REVISI DENGAN SLIDER -->
             <section id="editing" class="tab-pane">
                 <h2>Karya Editing Video</h2>
-                <p>Berikut adalah contoh hasil editing video yang telah saya kerjakan.</p>
-                 <div class="video-slider-container">
-                    <div class="video-slider" data-slider-id="editing-slider">
-                        <div class="gallery-item"> <!-- Slide 1 -->
+                <p>Geser untuk melihat karya editing video lainnya.</p>
+                 <div class="video-slider-container" id="editing-slider-container">
+                    <div class="video-slider-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="video-slide-item">
                             <div class="video-wrapper">
-                                <video controls loop preload="metadata" playsinline>
+                                <video preload="metadata" playsinline controls>
                                     <source src="assets/FYGI.mp4" type="video/mp4">
                                     Browser Anda tidak mendukung tag video.
                                 </video>
+                                <p class="video-caption">FYGI Video</p>
                             </div>
-                            <p class="video-caption">FYGI Video</p>
                         </div>
-                        <div class="gallery-item"> <!-- Slide 2 -->
+                        <!-- Slide 2 -->
+                        <div class="video-slide-item">
                             <div class="video-wrapper">
-                                <video controls loop preload="metadata" playsinline>
+                                <video preload="metadata" playsinline controls>
                                     <source src="assets/loseless_1.mp4" type="video/mp4">
                                     Browser Anda tidak mendukung tag video.
                                 </video>
+                                <p class="video-caption">Hima Gametech Promotion</p>
                             </div>
-                            <p class="video-caption">Hima Gametech Promotion</p>
                         </div>
-                        <div class="gallery-item"> <!-- Slide 3 -->
+                        <!-- Slide 3 -->
+                        <div class="video-slide-item">
                             <div class="video-wrapper">
-                                <video controls loop preload="metadata" playsinline>
+                                <video preload="metadata" playsinline controls>
                                     <source src="assets/99.mp4" type="video/mp4">
                                     Browser Anda tidak mendukung tag video.
                                 </video>
+                                <p class="video-caption">Re:Zero Edit</p>
                             </div>
-                            <p class="video-caption">Re:Zero Edit</p>
                         </div>
-                        <div class="gallery-item"> <!-- Slide 4 -->
+                        <!-- Slide 4 -->
+                        <div class="video-slide-item">
                             <div class="video-wrapper">
-                                <video controls loop preload="metadata" playsinline>
+                                <video preload="metadata" playsinline controls>
                                     <source src="assets/Fading Memories.mp4" type="video/mp4">
                                     Browser Anda tidak mendukung tag video.
                                 </video>
+                                <p class="video-caption">Fading Memories</p>
                             </div>
-                            <p class="video-caption">Fading Memories</p>
                         </div>
-                        <div class="gallery-item"> <!-- Slide 5 -->
+                        <!-- Slide 5 -->
+                        <div class="video-slide-item">
                             <div class="video-wrapper">
-                                <video controls loop preload="metadata" playsinline>
+                                <video preload="metadata" playsinline controls>
                                     <source src="assets/Impossible_2.mp4" type="video/mp4">
                                     Browser Anda tidak mendukung tag video.
                                 </video>
+                                <p class="video-caption">Impossible</p>
                             </div>
-                            <p class="video-caption">Impossible</p>
                         </div>
                     </div>
-                    <button class="slider-button prev" data-controls="editing-slider" aria-label="Previous Slide">❮</button>
-                    <button class="slider-button next" data-controls="editing-slider" aria-label="Next Slide">❯</button>
-                 </div>
+                    <button class="slider-nav prev" data-direction="-1">❮</button>
+                    <button class="slider-nav next" data-direction="1">❯</button>
+                    <div class="slider-dots">
+                        <!-- Dots akan di-generate oleh JavaScript -->
+                    </div>
+                </div>
             </section>
 
-            <!-- Panel Konten untuk Tab "About Me" - TIDAK BERUBAH -->
+            <!-- Panel Konten untuk Tab "About Me" -->
             <section id="about" class="tab-pane">
                 <h2>Tentang Saya</h2>
                 <p>Halo! Saya <strong>Aditya Pratama W.P</strong>, seorang seniman 3D dan editor video dengan passion di animasi, texturing, dan editing. Saya selalu antusias untuk belajar dan menciptakan visual yang menarik.</p>
@@ -221,7 +247,7 @@
         <footer class="site-footer">
             <p>© <span id="currentYear"></span> Aditya Pratama W.P. All Rights Reserved.</p>
         </footer>
-    </div> <!-- Akhir .portfolio-container -->
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
