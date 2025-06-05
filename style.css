@@ -10,7 +10,7 @@ body {
 }
 
 .portfolio-container {
-    max-width: 1200px;
+    max-width: 1200px; /* Keseluruhan lebar halaman portofolio */
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -128,7 +128,7 @@ a:hover {
 }
 
 /* Styling untuk Video Wrapper (Featured Project, BUKAN SLIDER) */
-#featured .video-wrapper { /* Target spesifik untuk non-slider */
+#featured .video-wrapper { 
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -141,7 +141,7 @@ a:hover {
     padding-bottom: 10px;
 }
 
-#featured .video-wrapper video { /* Target spesifik untuk non-slider */
+#featured .video-wrapper video { 
     max-width: 100%;
     width: 100%;
     height: auto;
@@ -152,7 +152,7 @@ a:hover {
     background-color: #000;
 }
 
-/* Caption berlaku umum, baik untuk featured maupun slider, jadi tidak perlu spesifik */
+/* Caption berlaku umum, baik untuk featured maupun slider */
 .video-caption {
     font-size: 0.9em;
     color: #ccc;
@@ -240,59 +240,53 @@ a:hover {
 /* --- STYLING UNTUK VIDEO SLIDER --- */
 .video-slider-container {
     position: relative;
-    max-width: 850px; /* Lebar maksimum keseluruhan area slider */
-    margin: 20px auto; /* Pusatkan kontainer slider */
-    overflow: hidden; /* Ini yang membuat hanya 1 slide terlihat */
-    /* background-color: transparent; atau #1e1e1e jika ingin sama dengan tab-pane */
-    border-radius: 8px; /* Jika ada background, ini akan terlihat */
+    max-width: 1000px; /* --- PERBESAR LEBAR KONTEN SLIDER --- */
+    margin: 20px auto; 
+    overflow: hidden; 
+    border-radius: 8px; 
 }
 
 .video-slider-wrapper {
-    display: flex; /* Membuat semua slide berjajar horizontal */
-    transition: transform 0.5s ease-in-out; /* Efek transisi geser */
+    display: flex; 
+    transition: transform 0.5s ease-in-out; 
 }
 
 .video-slide-item {
-    min-width: 100%; /* Setiap slide mengambil lebar penuh .video-slider-container */
+    min-width: 100%; 
     box-sizing: border-box;
-    display: flex; /* Untuk memusatkan .video-wrapper di tengah */
-    justify-content: center; /* Pusatkan .video-wrapper secara horizontal */
-    align-items: center; /* Pusatkan .video-wrapper secara vertikal */
-    padding: 10px 0; /* Padding atas-bawah untuk slide item, agar shadow terlihat */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 10px 0; 
 }
 
 /* .video-wrapper di dalam slider */
 .video-slide-item .video-wrapper {
-    width: auto; /* Lebar .video-wrapper akan menyesuaikan dengan video di dalamnya */
-    max-width: 100%; /* Tapi tidak lebih lebar dari .video-slide-item */
-    
-    background-color: #2c2c2c; /* Latar belakang untuk area video + caption */
-    border-radius: 8px; /* Radius untuk wrapper */
-    box-shadow: 0 3px 10px rgba(0,0,0,0.3); /* Shadow untuk wrapper */
-    overflow: hidden; /* Penting agar border-radius video terlihat */
+    width: auto; 
+    max-width: 100%; 
+    background-color: #2c2c2c; 
+    border-radius: 8px; 
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3); 
+    overflow: hidden; 
     position: relative;
-    padding-bottom: 10px; /* Ruang untuk caption di dalam wrapper */
-    /* margin: 0 10px; Tidak perlu jika justify-content:center sudah ada di parent */
+    padding-bottom: 10px; 
 }
 
 .video-slide-item .video-wrapper video {
-    display: block; /* Hilangkan potensi spasi bawah */
-    width: 100%;    /* Video mengisi lebar .video-wrapper */
-    max-height: 65vh; /* Batas tinggi maksimum video, bisa disesuaikan */
-    height: auto;   /* Tinggi menyesuaikan aspek rasio berdasarkan lebar 100% */
-    object-fit: contain; /* Jaga aspek rasio, letterbox/pillarbox jika perlu */
-    border-top-left-radius: 6px; /* Sesuaikan dengan .video-wrapper */
+    display: block; 
+    width: 100%;    
+    max-height: 75vh; /* --- PERBESAR TINGGI MAKSIMUM VIDEO --- */
+    height: auto;   
+    object-fit: contain; 
+    border-top-left-radius: 6px; 
     border-top-right-radius: 6px;
-    background-color: #000; /* Latar belakang untuk video jika ada letterboxing */
+    background-color: #000; 
 }
 
 /* Khusus untuk video vertikal di dalam slider */
 .video-slide-item[data-is-vertical="true"] .video-wrapper {
-    max-width: 380px; /* Batasi lebar maksimum untuk wrapper video vertikal */
-    /* width: auto; sudah diatur di atas dan akan berlaku */
+    max-width: 420px; /* Sedikit diperbesar juga untuk vertikal jika diinginkan */
 }
-/* .video-slide-item[data-is-vertical="true"] .video-wrapper video tidak perlu style khusus lagi,
-   karena style video umum sudah mengakomodasi dengan baik (width: 100% dari wrapper vertikalnya) */
 
 
 /* Tombol Navigasi Slider */
@@ -300,15 +294,15 @@ a:hover {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(20, 20, 20, 0.55); /* Sedikit lebih transparan */
+    background-color: rgba(20, 20, 20, 0.55); 
     color: white;
     border: none;
-    font-size: 26px; /* Sesuaikan ukuran ikon */
+    font-size: 28px; /* Sedikit perbesar ikon tombol */
     cursor: pointer;
     z-index: 10;
-    border-radius: 50%; /* Membuat tombol bulat */
-    width: 48px; /* Lebar tetap untuk tombol bulat */
-    height: 48px; /* Tinggi tetap untuk tombol bulat */
+    border-radius: 50%; 
+    width: 52px; /* Perbesar tombol */
+    height: 52px; /* Perbesar tombol */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -318,23 +312,23 @@ a:hover {
 
 .slider-nav:hover {
     background-color: rgba(0, 0, 0, 0.75);
-    transform: translateY(-50%) scale(1.08); /* Efek hover sedikit membesar */
+    transform: translateY(-50%) scale(1.08); 
 }
 
 .slider-nav.prev {
-    left: 20px; /* Jarak dari tepi kiri kontainer slider */
+    left: 15px; /* Sesuaikan jarak jika perlu, mungkin sedikit lebih dekat jika slider lebih lebar */
 }
 
 .slider-nav.next {
-    right: 20px; /* Jarak dari tepi kanan kontainer slider */
+    right: 15px; /* Sesuaikan jarak jika perlu */
 }
 
 /* Dots Navigasi Slider */
 .slider-dots {
     text-align: center;
-    padding: 15px 0 5px 0; /* Kurangi padding bawah sedikit */
-    position: relative; /* Agar tidak tertimpa elemen absolut lain jika ada */
-    z-index: 5; /* Di bawah tombol navigasi jika ada tumpang tindih potensial */
+    padding: 15px 0 5px 0; 
+    position: relative; 
+    z-index: 5; 
 }
 
 .slider-dot {
