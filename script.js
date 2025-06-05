@@ -24,8 +24,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const activeSliderContainer = targetPane.querySelector('.video-slider-container');
             if (activeSliderContainer) {
                 const sliderId = activeSliderContainer.id;
-                if (sliders[sliderId]) {
+                if (sliders[sliderId] && sliders[sliderId].slides.length > 0) { // Pastikan ada slide
                     sliders[sliderId].goToSlide(0, true); // true untuk autoplay
+                } else if (sliders[sliderId] && sliders[sliderId].slides.length === 0) {
+                    // Handle kasus slider kosong jika diperlukan (mis. tampilkan pesan)
+                    console.log(`Slider #${sliderId} tidak memiliki slide.`);
                 }
             } else {
                  // Jika tab yang aktif adalah featured, coba mainkan video featured
@@ -70,27 +73,40 @@ document.addEventListener('DOMContentLoaded', function() {
     function initializeVideoSlider(containerId) {
         const sliderContainer = document.getElementById(containerId);
         if (!sliderContainer) {
-            console.warn(`Slider container #${containerId} not found.`);
+            // console.warn(`Slider container #${containerId} not found.`); // Komentari jika terlalu berisik
             return null;
         }
 
         const sliderWrapper = sliderContainer.querySelector('.video-slider-wrapper');
-        const slides = Array.from(sliderContainer.querySelectorAll('.video-slide-item'));
+        const slideItems = Array.from(sliderContainer.querySelectorAll('.video-slide-item')); // Ganti nama variabel agar lebih jelas
         const prevButton = sliderContainer.querySelector('.slider-nav.prev');
         const nextButton = sliderContainer.querySelector('.slider-nav.next');
         const dotsContainer = sliderContainer.querySelector('.slider-dots');
         
-        if (!sliderWrapper || slides.length === 0 || !prevButton || !nextButton || !dotsContainer) {
-            console.warn(`Missing elements for slider #${containerId}.`);
+        if (!sliderWrapper || !prevButton || !nextButton || !dotsContainer) { // Tidak perlu cek slideItems.length di sini
+            // console.warn(`Missing essential elements for slider #${containerId}.`); // Komentari jika terlalu berisik
             return null;
         }
+        
+        if (slideItems.length === 0) {
+            // console.log(`No slides found for slider #${containerId}. Hiding navigation.`); // Komentari jika terlalu berisik
+            prevButton.style.display = 'none';
+            nextButton.style.display = 'none';
+            dotsContainer.style.display = 'none';
+            return { goToSlide: () => {}, slides: [] }; // Kembalikan objek dummy jika tidak ada slide
+        } else {
+            prevButton.style.display = 'flex'; // Pastikan tombol terlihat jika ada slide
+            nextButton.style.display = 'flex';
+            dotsContainer.style.display = 'block'; // atau 'flex' jika dots mau di-flexbox
+        }
+
 
         let currentIndex = 0;
-        const totalSlides = slides.length;
+        const totalSlides = slideItems.length;
 
         // Buat dots
-        dotsContainer.innerHTML = ''; // Kosongkan dots sebelumnya jika ada
-        slides.forEach((_, index) => {
+        dotsContainer.innerHTML = ''; 
+        slideItems.forEach((_, index) => {
             const dot = document.createElement('button');
             dot.classList.add('slider-dot');
             dot.addEventListener('click', () => goToSlide(index, true));
@@ -104,29 +120,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 dot.classList.toggle('active', index === currentIndex);
             });
 
-            // Pause semua video
-            slides.forEach(slide => {
+            slideItems.forEach((slide, idx) => {
                 const video = slide.querySelector('video');
-                if (video && !video.paused) {
+                if (video && !video.paused && idx !== currentIndex) { // Pause video yang tidak aktif
                     video.pause();
                 }
             });
         }
         
         function playCurrentVideo() {
-            const currentSlide = slides[currentIndex];
+            if (totalSlides === 0) return; // Jangan lakukan apa-apa jika tidak ada slide
+            const currentSlide = slideItems[currentIndex];
             const video = currentSlide.querySelector('video');
             if (video) {
-                video.currentTime = 0; // Mulai dari awal
+                video.currentTime = 0; 
                 video.play().catch(error => {
-                    console.log(`Autoplay untuk video di slide ${currentIndex} diblokir atau gagal:`, error);
-                    // Browser mungkin memerlukan interaksi pengguna untuk autoplay dengan suara
+                    console.log(`Autoplay untuk video di slide ${currentIndex} (${containerId}) diblokir atau gagal:`, error);
                 });
             }
         }
 
         function goToSlide(index, shouldPlay = false) {
-            currentIndex = (index + totalSlides) % totalSlides; // Looping
+            if (totalSlides === 0) return; // Jangan lakukan apa-apa jika tidak ada slide
+            currentIndex = (index + totalSlides) % totalSlides; 
             updateSlider();
             if (shouldPlay) {
                 playCurrentVideo();
@@ -136,21 +152,23 @@ document.addEventListener('DOMContentLoaded', function() {
         prevButton.addEventListener('click', () => goToSlide(currentIndex - 1, true));
         nextButton.addEventListener('click', () => goToSlide(currentIndex + 1, true));
 
-        // Inisialisasi slider ke slide pertama
-        goToSlide(0, false); // Jangan autoplay saat inisialisasi awal, biarkan tab activation yang handle
-
-        console.log(`Slider #${containerId} initialized with ${totalSlides} slides.`);
+        goToSlide(0, false); 
         
-        return { goToSlide, slides }; // Kembalikan objek dengan metode dan properti yang mungkin berguna
+        // console.log(`Slider #${containerId} initialized with ${totalSlides} slides.`); // Komentari jika terlalu berisik
+        
+        return { goToSlide, slides: slideItems }; 
     }
 
-    // Inisialisasi semua slider yang ada di halaman
-    // Pastikan ID container slider unik
     sliders['animation-slider-container'] = initializeVideoSlider('animation-slider-container');
     sliders['editing-slider-container'] = initializeVideoSlider('editing-slider-container');
+    
+    // Panggil activateTab untuk tab yang aktif saat load, untuk memastikan video pertama dimainkan jika ada slider
+    if (defaultActiveTabId) {
+        activateTab(defaultActiveTabId);
+    } else if (tabButtons.length > 0 && tabButtons[0].dataset.tab) {
+        activateTab(tabButtons[0].dataset.tab);
+    }
 
-    // Ketika tab berubah, pastikan video di slider pertama tab baru dimainkan (jika ada slider)
-    // Ini sudah ditangani di dalam fungsi activateTab
 
     console.log("Sistem tab, footer, dan slider video siap!");
 });
