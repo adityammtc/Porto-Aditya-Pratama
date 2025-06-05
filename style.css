@@ -1,144 +1,349 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabPanes = document.querySelectorAll('.tab-pane');
+/* Reset Dasar & Gaya Global */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #e0e0e0;
+    font-size: 16px;
+}
 
-    function activateTab(targetTabId) {
-        // Pause semua video di semua slider saat tab diganti
-        document.querySelectorAll('.video-slider video').forEach(video => {
-            if (!video.paused) {
-                video.pause();
-            }
-        });
-        // Pause semua model Sketchfab (jika API memungkinkan, atau setidaknya iframe-nya)
-        // Untuk iframe Sketchfab, tidak ada cara standar untuk pause via JS dari parent kecuali reload.
-        // Cukup pastikan tidak autoplay berlebihan.
+.portfolio-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
-        tabButtons.forEach(btn => btn.classList.remove('active'));
-        tabPanes.forEach(pane => {
-            pane.style.display = 'none';
-            pane.classList.remove('active');
-        });
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff;
+    margin-top: 0;
+    margin-bottom: 0.75em;
+}
 
-        const targetButton = document.querySelector(`.tab-button[data-tab="${targetTabId}"]`);
-        const targetPane = document.getElementById(targetTabId);
+p {
+    margin-bottom: 1em;
+}
 
-        if (targetButton && targetPane) {
-            targetButton.classList.add('active');
-            targetPane.style.display = 'block';
-            targetPane.classList.add('active');
+a {
+    color: #bb86fc;
+    text-decoration: none;
+}
 
-            // Jika tab yang diaktifkan memiliki slider, pastikan slide pertama terlihat benar
-            // dan tombol navigasi diupdate (terutama jika ada inisialisasi ulang)
-            if (targetPane.querySelector('.video-slider')) {
-                const sliderId = targetPane.querySelector('.video-slider').dataset.sliderId;
-                // Jika ada fungsi untuk re-init atau refresh slider, panggil di sini
-                // Untuk implementasi ini, showSlide(0) pada slider yang relevan mungkin cukup
-                // atau panggil initializeSlider lagi jika lebih mudah
-                const sliderInstance = window.activeSliders && window.activeSliders[sliderId];
-                if (sliderInstance) {
-                     sliderInstance.showSlide(sliderInstance.getCurrentSlideIndex());
-                }
-            }
-        }
-    }
+a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
 
-    let defaultActiveTabId = null;
-    tabButtons.forEach(button => {
-        if (button.classList.contains('active')) {
-            defaultActiveTabId = button.dataset.tab;
-        }
-    });
+/* Header Sticky */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #1a1a1a;
+    padding: 20px 0;
+    border-bottom: 2px solid #333333;
+    text-align: center;
+}
 
-    if (defaultActiveTabId) {
-        activateTab(defaultActiveTabId);
-    } else if (tabButtons.length > 0) {
-        activateTab(tabButtons[0].dataset.tab);
-    }
+.site-header h1 {
+    font-size: 2.8em;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
 
-    tabButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            activateTab(this.dataset.tab);
-        });
-    });
+/* Navigasi Tab */
+.tab-navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
 
-    const yearSpan = document.getElementById('currentYear');
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-    }
+.tab-navigation .tab-button {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    outline: none;
+    margin-bottom: 5px;
+}
 
-    // --- LOGIKA SLIDER BARU ---
-    window.activeSliders = {}; // Untuk menyimpan instance slider
+.tab-navigation .tab-button:hover {
+    background-color: #3a3a3a;
+    border-color: #666;
+    transform: translateY(-2px);
+}
 
-    function initializeSlider(sliderId) {
-        const sliderContainer = document.querySelector(`.video-slider[data-slider-id="${sliderId}"]`);
-        if (!sliderContainer) {
-            // console.warn(`Slider container for ID "${sliderId}" not found.`);
-            return;
-        }
+.tab-navigation .tab-button.active {
+    background-color: #bb86fc;
+    color: #121212;
+    border-color: #bb86fc;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
+}
 
-        const slides = Array.from(sliderContainer.querySelectorAll('.gallery-item'));
-        const prevButton = document.querySelector(`.slider-button.prev[data-controls="${sliderId}"]`);
-        const nextButton = document.querySelector(`.slider-button.next[data-controls="${sliderId}"]`);
-        let currentSlideIndex = 0;
+/* Area Konten Tab */
+.tab-content-area {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
 
-        if (!slides.length) {
-            // console.warn(`No slides found for slider ID "${sliderId}".`);
-            if(prevButton) prevButton.style.display = 'none';
-            if(nextButton) nextButton.style.display = 'none';
-            return;
-        }
-        
-        if (slides.length <= 1) {
-            if(prevButton) prevButton.style.display = 'none';
-            if(nextButton) nextButton.style.display = 'none';
-            slides[0].classList.add('active-slide'); // Pastikan slide tunggal terlihat
-            return;
-        }
+.tab-pane {
+    display: none;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
 
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.remove('active-slide');
-                const video = slide.querySelector('video');
-                if (video && !video.paused && i !== index) { // Pause video jika tidak di slide aktif
-                    video.pause();
-                }
-            });
-            slides[index].classList.add('active-slide');
-            currentSlideIndex = index;
+.tab-pane.active {
+    display: block;
+}
 
-            if (prevButton) prevButton.disabled = (index === 0);
-            if (nextButton) nextButton.disabled = (index === slides.length - 1);
-        }
+.tab-pane h2 {
+    font-size: 2.2em;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    margin-top: 0;
+}
 
-        if (nextButton) {
-            nextButton.addEventListener('click', () => {
-                if (currentSlideIndex < slides.length - 1) {
-                    showSlide(currentSlideIndex + 1);
-                }
-            });
-        }
+.project-breakdown h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: #f0f0f0;
+}
 
-        if (prevButton) {
-            prevButton.addEventListener('click', () => {
-                if (currentSlideIndex > 0) {
-                    showSlide(currentSlideIndex - 1);
-                }
-            });
-        }
+/* Styling untuk Video Wrapper (Umum dan Featured Project) */
+.video-wrapper { /* Ini adalah wrapper individual untuk video DAN caption */
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #2a2a2a; /* Latar belakang untuk area video + caption */
+    border-radius: 6px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    overflow: hidden; /* Penting agar border-radius video terlihat */
+    position: relative;
+    padding-bottom: 10px; /* Ruang untuk caption di dalam wrapper */
+}
 
-        // Inisialisasi: Tampilkan slide pertama
-        showSlide(0);
+.video-wrapper video {
+    max-width: 100%;
+    width: 100%; /* Video mengisi lebar video-wrapper */
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Pusatkan video jika ada batasan max-width */
+    border-top-left-radius: 6px; /* Sesuaikan dengan .video-wrapper */
+    border-top-right-radius: 6px;
+    background-color: #000; /* Latar belakang untuk video jika ada letterboxing */
+}
 
-        // Simpan instance untuk referensi jika perlu
-        window.activeSliders[sliderId] = {
-            showSlide,
-            getCurrentSlideIndex: () => currentSlideIndex
-        };
-    }
+.video-caption {
+    font-size: 0.9em;
+    color: #ccc;
+    text-align: center;
+    padding: 10px 10px 0px 10px; /* Padding di atas caption */
+    margin-bottom: 0;
+}
 
-    // Inisialisasi semua slider yang ada di halaman
-    initializeSlider('animation-slider');
-    initializeSlider('editing-slider');
+/* Styling untuk Model Sketchfab di Featured Project */
+.featured-model-wrapper {
+    width: 100%;
+    background-color: #222;
+    border-radius: 6px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    padding: 0;
+    overflow: hidden;
+}
+.featured-model-wrapper .sketchfab-embed-wrapper {
+    width: 100%;
+    height: 450px;
+}
+.featured-model-wrapper .sketchfab-embed-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
 
-    console.log("Sistem tab, footer, dan slider siap!");
-});
+/* Styling untuk Galeri Sketchfab (tab #texturing) */
+#texturing .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+#texturing .gallery .gallery-item {
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#texturing .gallery-item .sketchfab-embed-wrapper {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    margin-bottom: 10px;
+    background-color: #222;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+#texturing .gallery-item .sketchfab-embed-wrapper iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#texturing .gallery-item .sketchfab-embed-wrapper p {
+    font-size: 12px !important;
+    font-weight: normal !important;
+    margin: 8px 5px 0px 5px !important;
+    color: #b0b0b0 !important;
+    text-align: center;
+    line-height: 1.4;
+}
+
+#texturing .gallery-item .sketchfab-embed-wrapper p a {
+    font-weight: bold !important;
+    color: #bb86fc !important;
+}
+
+#texturing .gallery-item .sketchfab-embed-wrapper p a:hover {
+    color: #ffffff !important;
+    text-decoration: underline !important;
+}
+
+
+/* --- STYLING UNTUK VIDEO SLIDER --- */
+.video-slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px; /* Batasi lebar maksimum slider */
+    margin: 20px auto; /* Pusatkan slider */
+    overflow: hidden; /* Ini yang membuat hanya 1 slide terlihat */
+    background-color: #222; /* Latar belakang untuk kontainer slider */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.video-slider-wrapper {
+    display: flex; /* Membuat semua slide berjajar horizontal */
+    transition: transform 0.5s ease-in-out; /* Efek transisi geser */
+}
+
+.video-slide-item {
+    min-width: 100%; /* Setiap slide mengambil lebar penuh kontainer */
+    box-sizing: border-box;
+    padding: 10px; /* Beri sedikit padding di sekitar .video-wrapper di dalam slide */
+}
+
+/* Penyesuaian .video-wrapper di dalam slider */
+.video-slide-item .video-wrapper {
+    margin-top: 0;
+    margin-bottom: 0;
+    background-color: #2c2c2c; /* Warna latar sedikit beda untuk item slide */
+}
+
+.video-slide-item .video-wrapper video {
+    max-height: 70vh; /* Batas tinggi maksimum video agar tidak terlalu besar di layar */
+    object-fit: contain; /* Pastikan video tidak terpotong, letterbox jika perlu */
+}
+
+/* Khusus untuk video vertikal di dalam slider */
+.video-slide-item[data-is-vertical="true"] .video-wrapper {
+    max-width: 400px; /* Batasi lebar maksimum untuk wrapper video vertikal */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.video-slide-item[data-is-vertical="true"] .video-wrapper video {
+    max-height: 70vh; /* Bisa sama atau disesuaikan lagi */
+    width: auto; /* Biarkan lebar menyesuaikan dengan tinggi dan aspek rasio */
+    /* object-fit: contain; sudah ada di atas */
+}
+
+
+/* Tombol Navigasi Slider */
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.slider-nav:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.slider-nav.prev {
+    left: 10px;
+}
+
+.slider-nav.next {
+    right: 10px;
+}
+
+/* Dots Navigasi Slider */
+.slider-dots {
+    text-align: center;
+    padding: 15px 0 10px 0; /* Beri ruang di bawah slider untuk dots */
+    background-color: #222; /* Samakan dengan kontainer slider */
+    border-bottom-left-radius: 8px; /* Samakan dengan kontainer slider */
+    border-bottom-right-radius: 8px;
+}
+
+.slider-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: #555;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.slider-dot.active {
+    background-color: #bb86fc;
+}
+
+
+/* Footer */
+.site-footer {
+    text-align: center;
+    padding: 25px 0;
+    background-color: #1f1f1f;
+    color: #aaaaaa;
+    border-top: 2px solid #333333;
+    font-size: 0.9em;
+    margin-top: 30px;
+}
