@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aditya Pratama W.P - 3D Animation & Texturing Portfolio</title> <!-- Judul Halaman Diperbarui -->
+    <title>Aditya Pratama W.P - 3D Animation & Texturing Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="portfolio-container">
         <header class="site-header">
-            <h1>Aditya Pratama W.P</h1> <!-- Judul Header Diperbarui -->
+            <h1>Portofolio Aditya Pratama Widya Putra</h1> <!-- JUDUL HEADER DIPERBARUI -->
             <nav class="tab-navigation">
                 <ul>
                     <li><button class="tab-button active" data-tab="featured">Featured Project</button></li>
@@ -22,7 +22,7 @@
         </header>
 
         <main class="tab-content-area">
-            <!-- Panel Konten untuk Tab "Featured Project" - TELAH DIREVISI -->
+            <!-- Panel Konten untuk Tab "Featured Project" -->
             <section id="featured" class="tab-pane active">
                 <h2>Featured Project Showcase</h2>
                 <p>Berikut adalah sorotan dari kemampuan saya dalam animasi 3D dan texturing, yang merupakan bagian integral dari proyek pengembangan game balap sebagai tugas kuliah di STMM MMTC Yogyakarta.</p>
@@ -31,7 +31,7 @@
                     <h3>Animasi MVP Pocong Balap</h3>
                     <div class="video-wrapper">
                         <video controls loop preload="metadata" playsinline>
-                            <source src="assets/Animasi Pocong.mp4" type="video/mp4"> <!-- VIDEO FEATURED PROJECT -->
+                            <source src="assets/Animasi Pocong.mp4" type="video/mp4">
                             Browser Anda tidak mendukung tag video.
                         </video>
                     </div>
@@ -39,62 +39,69 @@
 
                     <h3>Featured Texturing (via Sketchfab): Leak Balap</h3>
                     <div class="featured-model-wrapper" id="featured-model-sketchfab">
-                        <!-- KODE EMBED SKETCHFAB "Leak Balap" ASLI DARI KAMU -->
                         <div class="sketchfab-embed-wrapper"> <iframe title="Leak Balap Indonesian Ghost" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/4ea93a705cb147f0aaacff09962dfb13/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/leak-balap-indonesian-ghost-4ea93a705cb147f0aaacff09962dfb13?utm_medium=embed&utm_campaign=share-popup&utm_content=4ea93a705cb147f0aaacff09962dfb13" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Leak Balap Indonesian Ghost </a> by <a href="https://sketchfab.com/adityammtc?utm_medium=embed&utm_campaign=share-popup&utm_content=4ea93a705cb147f0aaacff09962dfb13" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Aditya Pratama </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=4ea93a705cb147f0aaacff09962dfb13" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
                     </div>
                      <p>Salah satu karakter hasil texturing saya untuk proyek game balap. Fokus utama pada proyek ini adalah menciptakan tekstur yang detail dan sesuai dengan konsep karakter. Mesh 3D disediakan oleh rekan tim.</p>
                 </article>
             </section>
 
-            <!-- Panel Konten untuk Tab "3D Animation" -->
+            <!-- Panel Konten untuk Tab "3D Animation" - STRUKTUR HTML DIREVISI -->
             <section id="animation" class="tab-pane">
                 <h2>Koleksi Animasi 3D</h2>
                 <p>Berikut adalah beberapa video animasi 3D lain yang telah saya kerjakan.</p>
                 <div class="gallery">
-                    <div class="video-wrapper gallery-item">
-                        <video controls loop preload="metadata" playsinline>
-                            <source src="assets/repo gd_1.mp4" type="video/mp4">
-                            Browser Anda tidak mendukung tag video.
-                        </video>
+                    <div class="gallery-item"> <!-- ITEM 1 -->
+                        <div class="video-wrapper">
+                            <video controls loop preload="metadata" playsinline>
+                                <source src="assets/repo gd_1.mp4" type="video/mp4">
+                                Browser Anda tidak mendukung tag video.
+                            </video>
+                        </div>
                         <p class="video-caption">R.E.P.O. Geometry Dash</p>
                     </div>
-                    <!-- VIDEO BARU: sonetto short animation.mp4 -->
-                    <div class="video-wrapper gallery-item">
-                        <video controls loop preload="metadata" playsinline>
-                           <source src="assets/sonetto short animation.mp4" type="video/mp4">
-                           Browser Anda tidak mendukung tag video.
-                       </video>
+                    <div class="gallery-item" id="video-sonetto"> <!-- ITEM 2 - Video Vertikal -->
+                        <div class="video-wrapper">
+                           <video controls loop preload="metadata" playsinline>
+                               <source src="assets/sonetto short animation.mp4" type="video/mp4">
+                               Browser Anda tidak mendukung tag video.
+                           </video>
+                        </div>
                        <p class="video-caption">Sonetto Short Animation</p>
                    </div>
-                    <div class="video-wrapper gallery-item">
-                         <video controls loop preload="metadata" playsinline>
-                            <source src="assets/onepoundfish.mp4" type="video/mp4">
-                            Browser Anda tidak mendukung tag video.
-                        </video>
+                    <div class="gallery-item"> <!-- ITEM 3 -->
+                        <div class="video-wrapper">
+                             <video controls loop preload="metadata" playsinline>
+                                <source src="assets/onepoundfish.mp4" type="video/mp4">
+                                Browser Anda tidak mendukung tag video.
+                            </video>
+                        </div>
                         <p class="video-caption">One Pound Fish</p>
                     </div>
-                    <!-- Video "Die With Smile" dengan ID khusus untuk CSS -->
-                    <div class="video-wrapper gallery-item" id="video-die-with-smile">
-                        <video controls loop preload="metadata" playsinline>
-                           <source src="assets/die with smile 2_1_1.mp4" type="video/mp4">
-                           Browser Anda tidak mendukung tag video.
-                       </video>
+                    <div class="gallery-item" id="video-die-with-smile"> <!-- ITEM 4 - Video Vertikal -->
+                        <div class="video-wrapper">
+                            <video controls loop preload="metadata" playsinline>
+                               <source src="assets/die with smile 2_1_1.mp4" type="video/mp4">
+                               Browser Anda tidak mendukung tag video.
+                           </video>
+                        </div>
                        <p class="video-caption">Die With Smile</p>
                    </div>
-                   <!-- Video "Zembu" (caption diupdate) -->
-                   <div class="video-wrapper gallery-item">
-                        <video controls loop preload="metadata" playsinline>
-                           <source src="assets/zembu_1.mp4" type="video/mp4">
-                           Browser Anda tidak mendukung tag video.
-                       </video>
+                   <div class="gallery-item"> <!-- ITEM 5 -->
+                        <div class="video-wrapper">
+                            <video controls loop preload="metadata" playsinline>
+                               <source src="assets/zembu_1.mp4" type="video/mp4">
+                               Browser Anda tidak mendukung tag video.
+                           </video>
+                        </div>
                        <p class="video-caption">Roblox Anime Opening</p>
                    </div>
-                   <!-- VIDEO BARU: Fight.mp4 -->
-                   <div class="video-wrapper gallery-item">
-                        <video controls loop preload="metadata" playsinline>
-                           <source src="assets/Fight.mp4" type="video/mp4">
-                           Browser Anda tidak mendukung tag video.
-                       </video>
+                   <div class="gallery-item"> <!-- ITEM 6 -->
+                        <div class="video-wrapper">
+                            <video controls loop preload="metadata" playsinline>
+                               <source src="assets/Fight.mp4" type="video/mp4">
+                               Browser Anda tidak mendukung tag video.
+                           </video>
+                        </div>
                        <p class="video-caption">Fight</p>
                    </div>
                 </div>
@@ -153,52 +160,57 @@
                 <p style="margin-top: 20px;">Semua karater tersebut berdasarkan hantu dan mitos indonesia.</p>
             </section>
 
-            <!-- Panel Konten untuk Tab "Editing" -->
+            <!-- Panel Konten untuk Tab "Editing" - STRUKTUR HTML DIREVISI -->
             <section id="editing" class="tab-pane">
                 <h2>Karya Editing Video</h2>
                 <p>Berikut adalah contoh hasil editing video yang telah saya kerjakan.</p>
                  <div class="gallery">
-                    <!-- VIDEO BARU: FYGI.mp4 -->
-                    <div class="video-wrapper gallery-item">
-                        <video controls loop preload="metadata" playsinline>
-                            <source src="assets/FYGI.mp4" type="video/mp4">
-                            Browser Anda tidak mendukung tag video.
-                        </video>
+                    <div class="gallery-item"> <!-- ITEM 1 -->
+                        <div class="video-wrapper">
+                            <video controls loop preload="metadata" playsinline>
+                                <source src="assets/FYGI.mp4" type="video/mp4">
+                                Browser Anda tidak mendukung tag video.
+                            </video>
+                        </div>
                         <p class="video-caption">FYGI Video</p>
                     </div>
-                    <div class="video-wrapper gallery-item">
-                        <video controls loop preload="metadata" playsinline>
-                            <source src="assets/loseless_1.mp4" type="video/mp4">
-                            Browser Anda tidak mendukung tag video.
-                        </video>
+                    <div class="gallery-item"> <!-- ITEM 2 -->
+                        <div class="video-wrapper">
+                            <video controls loop preload="metadata" playsinline>
+                                <source src="assets/loseless_1.mp4" type="video/mp4">
+                                Browser Anda tidak mendukung tag video.
+                            </video>
+                        </div>
                         <p class="video-caption">Hima Gametech Promotion</p>
                     </div>
-                    <!-- VIDEO BARU: 99.mp4 -->
-                    <div class="video-wrapper gallery-item">
-                        <video controls loop preload="metadata" playsinline>
-                            <source src="assets/99.mp4" type="video/mp4">
-                            Browser Anda tidak mendukung tag video.
-                        </video>
+                    <div class="gallery-item"> <!-- ITEM 3 -->
+                        <div class="video-wrapper">
+                            <video controls loop preload="metadata" playsinline>
+                                <source src="assets/99.mp4" type="video/mp4">
+                                Browser Anda tidak mendukung tag video.
+                            </video>
+                        </div>
                         <p class="video-caption">Re:Zero Edit</p>
                     </div>
-                    <!-- VIDEO BARU: Fading Memories.mp4 -->
-                    <div class="video-wrapper gallery-item">
-                        <video controls loop preload="metadata" playsinline>
-                            <source src="assets/Fading Memories.mp4" type="video/mp4">
-                            Browser Anda tidak mendukung tag video.
-                        </video>
+                    <div class="gallery-item"> <!-- ITEM 4 -->
+                        <div class="video-wrapper">
+                            <video controls loop preload="metadata" playsinline>
+                                <source src="assets/Fading Memories.mp4" type="video/mp4">
+                                Browser Anda tidak mendukung tag video.
+                            </video>
+                        </div>
                         <p class="video-caption">Fading Memories</p>
                     </div>
-                    <!-- VIDEO BARU: Impossible_2.mp4 -->
-                    <div class="video-wrapper gallery-item">
-                        <video controls loop preload="metadata" playsinline>
-                            <source src="assets/Impossible_2.mp4" type="video/mp4">
-                            Browser Anda tidak mendukung tag video.
-                        </video>
+                    <div class="gallery-item"> <!-- ITEM 5 -->
+                        <div class="video-wrapper">
+                            <video controls loop preload="metadata" playsinline>
+                                <source src="assets/Impossible_2.mp4" type="video/mp4">
+                                Browser Anda tidak mendukung tag video.
+                            </video>
+                        </div>
                         <p class="video-caption">Impossible</p>
                     </div>
                  </div>
-                 <!-- Tidak ada deskripsi umum di sini sesuai permintaan -->
             </section>
 
             <!-- Panel Konten untuk Tab "About Me" -->
@@ -214,7 +226,7 @@
         </main>
 
         <footer class="site-footer">
-            <p>© <span id="currentYear"></span> Aditya Pratama W.P. All Rights Reserved.</p> <!-- Nama di Footer Diperbarui -->
+            <p>© <span id="currentYear"></span> Aditya Pratama W.P. All Rights Reserved.</p>
         </footer>
     </div> <!-- Akhir .portfolio-container -->
     <script src="script.js"></script>
