@@ -47,8 +47,8 @@ a:hover {
 }
 
 .site-header h1 {
-    font-size: 2.8em;
-    letter-spacing: 1px;
+    font-size: 2.5em; /* Sedikit disesuaikan untuk judul yang lebih panjang */
+    letter-spacing: 0.5px; /* Sedikit disesuaikan */
     margin-bottom: 20px;
     margin-top: 0;
 }
@@ -127,17 +127,14 @@ a:hover {
     color: #f0f0f0;
 }
 
-/* Styling untuk Video Wrapper (Umum dan Featured Project) */
-.video-wrapper {
+/* Styling untuk Video Wrapper (Umum dan Featured Project) - DIREVISI */
+.video-wrapper { /* Ini adalah wrapper untuk elemen <video> itu sendiri */
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #2a2a2a;
+    background-color: #222; /* Warna latar belakang jika video tidak mengisi penuh */
     border-radius: 6px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    overflow: hidden;
+    overflow: hidden;      /* Untuk memastikan video tidak keluar dari radius */
     position: relative;
+    /* margin-top, margin-bottom, margin-left, margin-right dihapus karena akan diatur oleh .gallery-item atau parent lain */
 }
 
 .video-wrapper video {
@@ -145,20 +142,19 @@ a:hover {
     width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto;
-    border-radius: 4px;
+    /* margin: 0 auto; tidak perlu jika video-wrapper sudah 100% */
+    border-radius: 4px; /* Bisa sama dengan parent atau sedikit lebih kecil */
 }
 
-.video-caption {
+.video-caption { /* Untuk caption di bawah video dalam galeri */
     font-size: 0.9em;
     color: #ccc;
     text-align: center;
-    padding: 8px 0 0 0;
-    margin-bottom: 0;
+    padding-top: 10px; /* Jarak dari video/model di atasnya */
+    margin-bottom: 0; /* Tidak ada margin bawah tambahan */
 }
 
-
-/* Styling untuk Image Wrapper (UV Map) - Dihapus dari penggunaan, tapi biarkan jika diperlukan nanti */
+/* Styling untuk Image Wrapper (UV Map) - Tetap sama */
 .image-wrapper {
     width: 100%;
     background-color: #2a2a2a;
@@ -181,8 +177,7 @@ a:hover {
     margin: 0;
 }
 
-
-/* Styling untuk Model Sketchfab di Featured Project */
+/* Styling untuk Model Sketchfab di Featured Project - Tetap sama */
 .featured-model-wrapper {
     width: 100%;
     background-color: #222;
@@ -202,57 +197,33 @@ a:hover {
     border: none;
 }
 
-/* --- MODIFIKASI UNTUK GALERI VIDEO --- */
-
-/* Styling untuk Galeri (Umum) */
+/* --- STYLING GALERI UMUM (GRID) --- */
 .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Atur minmax sesuai kebutuhan, 300px adalah contoh */
+    gap: 25px;
     margin-top: 20px;
 }
 
-/* Styling khusus untuk .gallery-item di dalam #animation dan #editing */
-#animation .gallery .gallery-item,
-#editing .gallery .gallery-item {
-    background-color: transparent;
-    padding: 0;
-    margin-bottom: 30px;
-    display: block;
-}
-
-/* Styling untuk .video-wrapper di dalam .gallery-item pada #animation dan #editing */
-#animation .gallery .video-wrapper,
-#editing .gallery .video-wrapper {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Styling khusus untuk .gallery-item yang berisi Sketchfab (di tab #texturing) */
-#texturing .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-}
-
-#texturing .gallery .gallery-item {
+.gallery-item { /* Ini adalah item individual dalam grid (untuk video atau model sketchfab) */
     background-color: #2a2a2a;
     border-radius: 8px;
     padding: 15px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    margin-bottom: 0;
+    /* overflow: hidden; Hati-hati jika caption terlalu panjang dan ingin visible */
 }
 
-/* --- AKHIR MODIFIKASI UNTUK GALERI VIDEO --- */
+/* Styling khusus untuk .gallery-item yang berisi Sketchfab (di tab #texturing) */
+/* #texturing .gallery sudah menggunakan .gallery */
+/* #texturing .gallery .gallery-item sudah menggunakan .gallery-item */
 
-
-/* Styling khusus untuk Sketchfab embed di dalam .gallery-item (tab #texturing) */
-#texturing .gallery-item .sketchfab-embed-wrapper {
+#texturing .gallery-item .sketchfab-embed-wrapper { /* Wrapper untuk iframe Sketchfab di dalam gallery-item */
     width: 100%;
-    height: 300px;
+    height: 300px; /* Tinggi default untuk model Sketchfab di galeri */
     position: relative;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; Dihapus, jarak diatur oleh .video-caption atau padding .gallery-item */
     background-color: #222;
     border-radius: 6px;
     overflow: hidden;
@@ -265,14 +236,15 @@ a:hover {
     border: none;
 }
 
-/* Styling untuk teks atribusi dari Sketchfab agar sesuai tema gelap */
+/* Styling untuk teks atribusi dari Sketchfab agar sesuai tema gelap (tetap penting) */
 #texturing .gallery-item .sketchfab-embed-wrapper p {
     font-size: 12px !important;
     font-weight: normal !important;
-    margin: 8px 5px 0px 5px !important;
+    margin: 8px 5px 0px 5px !important; /* Sedikit margin atas dari iframe */
     color: #b0b0b0 !important;
     text-align: center;
     line-height: 1.4;
+    padding-top: 0; /* Override .video-caption jika kelas p ini sama */
 }
 
 #texturing .gallery-item .sketchfab-embed-wrapper p a {
@@ -285,12 +257,16 @@ a:hover {
     text-decoration: underline !important;
 }
 
-/* Styling khusus untuk video vertikal "Die With Smile" */
-#video-die-with-smile {
-    max-width: 360px; /* Kamu bisa sesuaikan angka ini. Coba antara 320px - 450px */
-    margin-left: auto;
+
+/* Styling khusus untuk item video vertikal di galeri */
+#video-sonetto.gallery-item,
+#video-die-with-smile.gallery-item {
+    max-width: 360px; /* Lebar maksimum untuk item galeri yang berisi video vertikal */
+    margin-left: auto; /* Pusatkan item ini di dalam kolom grid jika kolomnya lebih lebar */
     margin-right: auto;
 }
+/* .video-wrapper di dalamnya akan otomatis mengisi 100% dari .gallery-item yang sudah di-max-width */
+
 
 /* Footer */
 .site-footer {
